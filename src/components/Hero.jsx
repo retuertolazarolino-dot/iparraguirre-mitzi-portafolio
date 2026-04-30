@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -33,14 +34,14 @@ const Hero = () => {
               </p>
 
               <div className="flex flex-wrap gap-4 font-outfit mt-12">
-                <button className="group flex items-center justify-center gap-2 bg-primary hover:bg-primary/80 text-white px-8 py-3.5 font-bold transition-all duration-300 uppercase tracking-widest text-xs min-w-[200px]">
+                <Link to="/mis-proyectos" className="group flex items-center justify-center gap-2 bg-primary hover:bg-primary/80 text-white px-8 py-3.5 font-bold transition-all duration-300 uppercase tracking-widest text-xs min-w-[200px]">
                   Ver Proyectos
                   <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} strokeWidth={1.5} />
-                </button>
-                <button className="group flex items-center justify-center gap-2 border border-white/20 hover:border-white text-white px-8 py-3.5 font-bold transition-all duration-300 uppercase tracking-widest text-xs min-w-[200px]">
+                </Link>
+                <a href="#contact" className="group flex items-center justify-center gap-2 border border-white/20 hover:border-white text-white px-8 py-3.5 font-bold transition-all duration-300 uppercase tracking-widest text-xs min-w-[200px]">
                   Hablemos
                   <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} strokeWidth={1.5} />
-                </button>
+                </a>
               </div>
             </motion.div>
           </div>

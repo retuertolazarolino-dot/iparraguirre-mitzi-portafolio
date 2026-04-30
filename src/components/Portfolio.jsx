@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const showcaseCards = [
   {
@@ -124,10 +125,10 @@ const Portfolio = () => {
                 </div>
               </div>
 
-              <button className="group flex items-center justify-center gap-2 border border-primary/50 text-white hover:bg-primary/10 px-8 py-3.5 font-bold transition-all duration-300 uppercase tracking-widest text-[10px] max-w-[180px]">
+              <Link to="/mis-proyectos#social-media" className="group flex items-center justify-center gap-2 border border-primary/50 text-white hover:bg-primary/10 px-8 py-3.5 font-bold transition-all duration-300 uppercase tracking-widest text-[10px] max-w-[180px]">
                 VER MÁS
                 <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={14} strokeWidth={1.5} />
-              </button>
+              </Link>
             </motion.div>
           </div>
 

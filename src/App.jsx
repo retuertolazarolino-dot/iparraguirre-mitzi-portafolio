@@ -21,7 +21,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home onOpenVideo={openVideo} />} />
-            <Route path="/projects" element={<ProjectsPage onOpenVideo={openVideo} />} />
+            <Route path="/mis-proyectos" element={<ProjectsPage onOpenVideo={openVideo} />} />
           </Routes>
         </main>
         
