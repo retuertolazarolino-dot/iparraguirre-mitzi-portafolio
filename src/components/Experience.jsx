@@ -7,31 +7,31 @@ const Experience = () => {
       year: '2019',
       role: 'Voluntariado',
       company: 'Ponle Corazón',
-      desc: 'Apoyo en atención al cliente y coordinación de campañas sociales.'
+      desc: 'Primer acercamiento al trabajo con usuarios, apoyando en atención y campañas sociales orientadas a la comunidad.'
     },
     {
-      year: '2021 - 2022',
+      year: '2021 – 2022',
       role: 'Asistente Administrativo',
-      company: 'Sandwicheria Mandys',
-      desc: 'Atención al cliente, control de inventario y soporte en procesos operativos.'
+      company: 'Mandys',
+      desc: 'Experiencia en atención al cliente y gestión operativa, fortaleciendo organización y comprensión de la experiencia del consumidor.'
     },
     {
       year: '2024',
       role: 'Practicante de Marketing',
-      company: 'Centro Psicoterapéutico Avanti',
-      desc: 'Creación de contenido, gestión de redes sociales y análisis de métricas.'
+      company: 'Avanti',
+      desc: 'Desarrollo de contenido digital, gestión de redes y análisis de métricas, integrando comunicación y comportamiento del usuario.'
     },
     {
-      year: '2024 - 2025',
+      year: '2024 – 2025',
       role: 'Asistente de Marketing',
-      company: 'Triad Agencia de Marketing',
-      desc: 'Apoyo en campañas digitales, planificación estratégica y creación de contenido.'
+      company: 'Triad',
+      desc: 'Participación en campañas digitales, planificación estratégica y producción de contenido para diferentes marcas.'
     },
     {
       year: '2026',
       role: 'Asistente de Marketing',
       company: 'Exelta Group',
-      desc: 'Estrategia de contenido, estructura web (UX/UI) y análisis orientado a la conversión.'
+      desc: 'Enfoque en estrategia digital, estructura web (UX/UI) y análisis orientado a la conversión.'
     }
   ];
 
@@ -71,16 +71,16 @@ const Experience = () => {
                 <div className="absolute top-[2px] left-0 w-2.5 h-2.5 bg-primary rounded-full shadow-[0_0_8px_#7c3aed]" />
                 
                 <div className="mt-2 pr-2">
-                  <span className="text-gray-400 font-outfit text-[10px] tracking-wide block mb-3">
+                  <span className="text-gray-400 font-outfit text-[12px] tracking-wide block mb-3">
                     {exp.year}
                   </span>
-                  <h3 className="text-white font-outfit text-sm font-bold leading-snug mb-1">
+                  <h3 className="text-white font-outfit text-[16px] font-bold leading-snug mb-1">
                     {exp.role}
                   </h3>
-                  <h4 className="text-gray-400 font-outfit text-[11px] font-light tracking-wide mb-4">
+                  <h4 className="text-gray-400 font-outfit text-[13px] font-light tracking-wide mb-4">
                     {exp.company}
                   </h4>
-                  <p className="text-gray-500 font-outfit text-[10px] font-light leading-relaxed">
+                  <p className="text-gray-500 font-outfit text-[12px] font-light leading-relaxed">
                     {exp.desc}
                   </p>
                 </div>

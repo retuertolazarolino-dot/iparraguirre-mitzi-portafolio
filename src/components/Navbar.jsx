@@ -22,7 +22,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 w-full z-[100] bg-black/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+      <div className="container mx-auto px-6 md:px-10 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Logo Section */}
           <Link to="/" className="flex items-center gap-2 group cursor-pointer" onClick={() => setIsMobileMenuOpen(false)}>

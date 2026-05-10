@@ -80,7 +80,7 @@ const Hero = () => {
               className="relative z-10 w-full max-w-lg flex justify-center"
             >
               <img
-                src="/assets/images/hero.png"
+                src="/assets/images/foto-hero.webp"
                 alt="Mitzi"
                 className="w-full h-auto object-contain drop-shadow-2xl z-10 pointer-events-none select-none"
                 style={{ filter: "drop-shadow(0 0 20px rgba(0,0,0,0.5))", maxHeight: "80vh" }}
@@ -95,7 +95,7 @@ const Hero = () => {
       {/* Vertical Social Links Sidebar */}
       <div className="fixed right-4 lg:right-10 top-1/2 -translate-y-1/2 hidden md:flex flex-col items-center gap-10 z-50">
         <div className="w-[1px] h-16 bg-gradient-to-b from-transparent to-white/20"></div>
-        
+
         <a href="#" className="flex flex-col items-center gap-2 group">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary group-hover:text-white transition-colors">
             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>

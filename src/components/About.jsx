@@ -33,7 +33,7 @@ const About = () => {
 
               {/* Mitzi Image Overlay */}
               <img
-                src="/assets/images/hero.png"
+                src="/assets/images/foto-hero.webp"
                 alt="Mitzi"
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[110%] max-w-none h-auto object-cover z-10 drop-shadow-[0_0_30px_rgba(124,58,237,0.2)] pointer-events-none"
                 style={{ filter: "drop-shadow(0 0 20px rgba(0,0,0,0.8))" }}
@@ -65,10 +65,13 @@ const About = () => {
 
               <div className="space-y-6 text-gray-400 font-outfit font-light leading-relaxed text-[13px] md:text-sm">
                 <p>
-                  Soy estratega digital enfocada en entender cómo las personas toman decisiones en entornos digitales.
+                  Soy bachiller en Administración y Marketing, enfocada en estrategia digital y comunicación.
                 </p>
                 <p>
-                  Trabajo integrando contenido, análisis y estructura web para transformar interacción <span className="text-primary font-medium">en resultados medibles.</span>
+                  Me apasiona comprender el comportamiento del consumidor y cómo este se traduce en interacción y toma de decisiones en entornos digitales. A partir de ello, desarrollo estrategias que integran <span className="text-primary font-medium">contenido, experiencia y análisis.</span>
+                </p>
+                <p>
+                  Me interesa construir mensajes que conecten, contando historias a través de imágenes, diseño y copy, con un propósito claro detrás de cada pieza.
                 </p>
               </div>
 
@@ -116,19 +119,47 @@ const About = () => {
 
               {/* Education Section */}
               <div className="pt-8 border-t border-white/5 relative">
-                <h3 className="text-[10px] font-bold tracking-[0.2em] text-primary uppercase mb-5 font-outfit">
+                <h3 className="text-[13px] font-bold tracking-[0.2em] text-primary uppercase mb-5 font-outfit">
                   EDUCACIÓN
                 </h3>
-                <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-white font-bold font-outfit text-xs flex items-center gap-2">
+
+                {/* Main Degree */}
+                <div className="mb-4">
+                  <h4 className="text-white font-bold font-outfit text-[15px] flex items-center gap-2">
                     <span className="w-1 h-1 bg-primary rounded-full shadow-[0_0_5px_#7c3aed]"></span>
-                    Universidad Continental
+                    Bachiller en Administración y Marketing
                   </h4>
-                  <span className="text-primary font-bold text-[10px] font-outfit">2019 - 2025</span>
+                  <p className="text-gray-400 text-[13px] font-outfit font-light pl-3 mt-1">
+                    Universidad Continental, Perú
+                  </p>
                 </div>
-                <div className="pl-3 space-y-1">
-                  <p className="text-gray-400 text-[10px] font-outfit font-light">Administración y Marketing</p>
-                  <p className="text-gray-400 text-[10px] font-outfit font-light">Tercio superior en múltiples ciclos.</p>
+
+                {/* Additional Certifications */}
+                <div className="space-y-2.5 pl-3">
+                  <div className="flex items-start gap-2">
+                    <span className="w-1 h-1 bg-primary/60 rounded-full mt-1.5 shrink-0"></span>
+                    <p className="text-gray-400 text-[13px] font-outfit font-light">
+                      Misión Mercadotecnia, Comunicación Publicitaria, Estrategia y Cultura – Universidad de la Costa (2025)
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="w-1 h-1 bg-primary/60 rounded-full mt-1.5 shrink-0"></span>
+                    <p className="text-gray-400 text-[13px] font-outfit font-light">
+                      Marketing Digital – Skill Centro de Capacitación (2023)
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="w-1 h-1 bg-primary/60 rounded-full mt-1.5 shrink-0"></span>
+                    <p className="text-gray-400 text-[13px] font-outfit font-light">
+                      Community Management – Domestika (2023)
+                    </p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="w-1 h-1 bg-primary/60 rounded-full mt-1.5 shrink-0"></span>
+                    <p className="text-gray-400 text-[13px] font-outfit font-light">
+                      Escritura Creativa para Redes Sociales – Conecta Empleo (2023)
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
