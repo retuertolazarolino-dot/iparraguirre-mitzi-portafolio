@@ -63,7 +63,7 @@ const ProjectCard = ({ project, index, onOpenVideo, aspectClass = 'aspect-[4/3]'
     className={`group ${hasVideo ? 'cursor-pointer' : ''}`}
     onClick={() => hasVideo && onOpenVideo(getVideoUrl(project.video))}
   >
-    <div className={`relative overflow-hidden rounded-2xl border border-white/5 bg-[#0a0a0a] transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_40px_rgba(255,0,0,0.1)] ${aspectClass}`}>
+    <div className={`relative overflow-hidden rounded-2xl border border-white/5 bg-dark-card transition-all duration-500 group-hover:border-primary/30 group-hover:shadow-[0_0_40px_rgba(166,97,223,0.15)] ${aspectClass}`}>
       <img
         src={`/assets/images/${project.image}`}
         alt={project.title}
@@ -111,9 +111,9 @@ const ProjectsPage = ({ onOpenVideo }) => {
   }, [location]);
 
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-dark min-h-screen">
       {/* Header */}
-      <section className="pt-32 pb-16 border-b border-white/5">
+      <section className="pt-32 pb-16 border-b border-white/5 px-3 md:px-4">
         <div className="container mx-auto px-4 md:px-8">
           <Link to="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary transition-colors mb-12 font-outfit text-xs tracking-widest uppercase">
             <ArrowLeft size={16} /> Volver al Inicio
@@ -133,7 +133,7 @@ const ProjectsPage = ({ onOpenVideo }) => {
       </section>
 
       {/* Social Media Section */}
-      <section id="social-media" className="py-24 border-b border-white/5">
+      <section id="social-media" className="py-16 border-b border-white/5 px-3 md:px-4">
         <div className="container mx-auto px-4 md:px-8">
           <div className="mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-wider mb-2">
@@ -165,7 +165,7 @@ const ProjectsPage = ({ onOpenVideo }) => {
       </section>
 
       {/* Edición de Videos Section */}
-      <section id="video-editing" className="py-24 bg-[#050505] border-b border-white/5">
+      <section id="video-editing" className="py-16 border-b border-white/5 px-3 md:px-4">
         <div className="container mx-auto px-4 md:px-8">
           <div className="mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-wider mb-2">
@@ -197,7 +197,7 @@ const ProjectsPage = ({ onOpenVideo }) => {
       </section>
 
       {/* Branding Section */}
-      <section id="branding" className="py-24 border-b border-white/5">
+      <section id="branding" className="py-16 border-b border-white/5 px-3 md:px-4">
         <div className="container mx-auto px-4 md:px-8">
           <div className="mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-wider mb-2">
@@ -229,7 +229,7 @@ const ProjectsPage = ({ onOpenVideo }) => {
       </section>
 
       {/* Diseño Web Section */}
-      <section id="web-design" className="py-24 bg-[#050505]">
+      <section id="web-design" className="py-16 px-3 md:px-4">
         <div className="container mx-auto px-4 md:px-8">
           <div className="mb-12">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-white uppercase tracking-wider mb-2">

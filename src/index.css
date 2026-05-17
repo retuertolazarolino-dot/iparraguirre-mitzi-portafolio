@@ -3,9 +3,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@100..900&family=Outfit:wght@100..900&display=swap');
 
 @theme {
-  --color-primary: #7c3aed;
-  --color-dark: #000000;
-  --color-dark-card: #111827;
+  --color-primary: #A661DF; /* Dark Fuxia */
+  --color-primary-light: #D9ACF2; /* Light Fuxia */
+  --color-dark: #0D1013; /* Total Background */
+  --color-dark-card: #1B1C20; /* Card Background */
+  --color-text-light: #FAF7FA; /* Text Color */
   
   --font-sans: "Inter", sans-serif;
   --font-display: "Bebas Neue", sans-serif;
@@ -17,7 +19,10 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-dark text-white font-sans antialiased;
+    @apply bg-dark text-[var(--color-text-light)] font-sans antialiased;
+  }
+  section, footer {
+    scroll-margin-top: 6rem;
   }
 }
 

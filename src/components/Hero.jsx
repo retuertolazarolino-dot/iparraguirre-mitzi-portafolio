@@ -1,127 +1,169 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Mail } from 'lucide-react';
+import { ArrowUpRight, Heart, Mail, Globe, MapPin, Calendar, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <section id="home" className="relative min-h-screen bg-[#050505] overflow-hidden flex items-center section-padding pt-20">
+    <section id="home" className="bg-dark w-full pt-32 pb-5 px-3 md:px-4 flex justify-center">
+      <div className="w-full max-w-[1800px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.5fr_1.8fr] gap-3 md:gap-4 items-stretch h-full">
 
-      <div className="container mx-auto z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
+          {/* Left Column - Image Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="bg-dark-card rounded-3xl p-2 h-full min-h-[500px] lg:min-h-[600px] relative overflow-hidden"
+            style={{
+              boxShadow: "inset 0 0 0 2px rgba(217, 172, 242, 0.3)", // Light fuxia subtle border
+            }}
+          >
+            {/* Inner purple glow gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-transparent opacity-50 z-0"></div>
+            
+            <img
+              src="/assets/images/foto-hero.webp"
+              alt="Mitzi Iparraguirre"
+              className="w-full h-full object-cover rounded-[1.25rem] relative z-10 object-top"
+              onError={(e) => { e.target.style.display = 'none'; }}
+            />
+          </motion.div>
 
-          {/* Left Content (Title & Text) */}
-          <div className="lg:col-span-7 z-20">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_#7c3aed]"></div>
-                <span className="text-gray-400 text-xs font-bold tracking-[0.2em] uppercase font-outfit">
-                  Estrategia que conecta
-                </span>
+          {/* Middle Column - Text Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="bg-dark-card rounded-3xl p-6 lg:p-8 flex flex-col justify-between h-full relative"
+          >
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <div className="bg-white/5 border border-white/10 rounded-full px-5 py-2">
+                  <span className="text-[11px] font-bold tracking-[0.15em] text-gray-300 font-outfit uppercase">
+                    Estrategia • Contenido • Diseño
+                  </span>
+                </div>
+                <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-primary-light">
+                  <Heart size={18} className="fill-primary-light/20" />
+                </div>
               </div>
 
-              <h1 className="text-[5rem] md:text-8xl lg:text-[clamp(5.5rem,7vw,110px)] font-display leading-[0.85] tracking-tight mb-8">
-                <span className="text-white block">CONTENIDO</span>
-                <span className="text-primary block">QUE CONVIERTE.</span>
+              <h1 className="text-5xl md:text-6xl xl:text-7xl font-sans font-bold leading-[1.1] tracking-tight mb-6">
+                <span className="text-[var(--color-text-light)] block">MITZI</span>
+                <span className="block bg-gradient-to-r from-[#E2B2F4] to-[#A669D7] bg-clip-text text-transparent">IPARRAGUIRRE</span>
               </h1>
 
-              <p className="text-gray-400 text-base md:text-lg max-w-md mb-10 font-outfit font-light leading-relaxed">
-                Transformo ideas en estrategias digitales y experiencias que generan resultados reales.
-              </p>
+              <h2 className="text-xl md:text-2xl font-semibold mb-6 text-[var(--color-text-light)]">
+                Estrategia digital & comunicación
+              </h2>
 
-              <div className="flex flex-wrap gap-4 font-outfit mt-12">
-                <Link to="/mis-proyectos" className="group flex items-center justify-center gap-2 bg-primary hover:bg-primary/80 text-white px-8 py-3.5 font-bold transition-all duration-300 uppercase tracking-widest text-xs min-w-[200px]">
-                  Ver Proyectos
-                  <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} strokeWidth={1.5} />
-                </Link>
-                <a href="#contact" className="group flex items-center justify-center gap-2 border border-white/20 hover:border-white text-white px-8 py-3.5 font-bold transition-all duration-300 uppercase tracking-widest text-xs min-w-[200px]">
-                  Hablemos
-                  <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} strokeWidth={1.5} />
-                </a>
+              <div className="space-y-4 text-gray-400 text-sm md:text-base font-outfit font-light leading-relaxed mb-10 max-w-md">
+                <p>
+                  Me apasiona comprender el comportamiento del consumidor y aplicarlo en una era digital.
+                </p>
+                <p>
+                  Creo estrategias de contenido, experiencias y comunicación que conectan y generan resultados.
+                </p>
               </div>
-            </motion.div>
-          </div>
+            </div>
 
-          {/* Right Content - Image Section */}
-          <div className="lg:col-span-5 relative flex justify-center items-center mt-12 lg:mt-0">
-            {/* Glowing Purple Background */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-              className="absolute w-[140%] max-w-[600px] aspect-square bg-primary/20 rounded-full blur-[100px] z-0"
-            />
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-              className="absolute w-[90%] max-w-[400px] aspect-square rounded-full border border-primary/30 z-0 shadow-[0_0_50px_rgba(124,58,237,0.3)] bg-gradient-to-tr from-[#1a0b36] to-transparent"
-            />
-            {/* Additional orbit lines */}
-            <motion.div
-              initial={{ scale: 0, opacity: 0, rotate: -45 }}
-              animate={{ scale: 1, opacity: 1, rotate: 0 }}
-              transition={{ duration: 1.5, delay: 0.6, ease: "easeOut" }}
-              className="absolute w-[110%] max-w-[480px] aspect-square rounded-full border border-white/10 z-0"
-            >
-              <div className="absolute top-[10%] left-[10%] w-2 h-2 rounded-full bg-white shadow-[0_0_10px_white]"></div>
-              <div className="absolute bottom-[20%] right-[10%] w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_10px_#7c3aed]"></div>
-            </motion.div>
+            <Link to="/mis-proyectos" className="group flex items-center gap-3 bg-primary-light text-dark hover:bg-white px-6 py-4 rounded-full font-bold transition-all duration-300 uppercase tracking-widest text-xs w-max mt-4">
+              Ver Proyectos
+              <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} strokeWidth={2} />
+            </Link>
+          </motion.div>
 
-            {/* Mitzi's Image Overlaid */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative z-10 w-full max-w-lg flex justify-center"
-            >
-              <img
-                src="/assets/images/foto-hero.webp"
-                alt="Mitzi"
-                className="w-full h-auto object-contain drop-shadow-2xl z-10 pointer-events-none select-none"
-                style={{ filter: "drop-shadow(0 0 20px rgba(0,0,0,0.5))", maxHeight: "80vh" }}
-                onError={(e) => { e.target.style.display = 'none'; }}
-              />
-            </motion.div>
-          </div>
+          {/* Right Column - Contact & Links */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col gap-3 md:gap-4 h-full"
+          >
+            {/* Top Behance Card */}
+            <a href="https://behance.net/mitziparraguirre" target="_blank" rel="noreferrer" className="bg-dark-card rounded-3xl p-5 md:p-6 flex items-start justify-between group hover:bg-white/5 transition-colors flex-[0.8]">
+              <div>
+                <span className="text-[10px] text-gray-400 font-bold tracking-widest uppercase mb-4 block">Portafolio</span>
+                <div className="flex items-center gap-4">
+                  <div className="text-3xl font-bold font-sans text-[var(--color-text-light)]">Bē</div>
+                  <span className="text-gray-300 font-medium hidden sm:block">behance.net/mitziparraguirre</span>
+                </div>
+              </div>
+              <div className="w-10 h-10 min-w-10 rounded-full bg-white/5 flex items-center justify-center text-primary-light group-hover:bg-primary-light group-hover:text-dark transition-colors">
+                <ArrowUpRight size={18} />
+              </div>
+            </a>
+
+            {/* Middle Grid - 4 Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 flex-[2]">
+              {/* Email */}
+              <a href="mailto:mitzi.ip20@gmail.com" className="bg-dark-card rounded-3xl p-5 flex flex-col justify-center gap-3 hover:bg-white/5 transition-colors group h-full">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary-light">
+                  <Mail size={20} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-[var(--color-text-light)]">Email</h3>
+                  <p className="text-xs text-gray-400 mt-1 truncate">mitzi.ip20@gmail.com</p>
+                </div>
+              </a>
+
+              {/* Web */}
+              <a href="https://mitziparraguirre.com" target="_blank" rel="noreferrer" className="bg-dark-card rounded-3xl p-5 flex flex-col justify-center gap-3 hover:bg-white/5 transition-colors group h-full">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary-light">
+                  <Globe size={20} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-[var(--color-text-light)]">Web</h3>
+                  <p className="text-xs text-gray-400 mt-1 truncate">mitziparraguirre.com</p>
+                </div>
+              </a>
+
+              {/* Instagram */}
+              <a href="https://instagram.com/mitziparraguirre" target="_blank" rel="noreferrer" className="bg-dark-card rounded-3xl p-5 flex flex-col justify-center gap-3 hover:bg-white/5 transition-colors group h-full">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary-light">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-[var(--color-text-light)]">Instagram</h3>
+                  <p className="text-xs text-gray-400 mt-1 truncate">@mitziparraguirre</p>
+                </div>
+              </a>
+
+              {/* LinkedIn */}
+              <a href="https://linkedin.com/in/mitziparraguirre" target="_blank" rel="noreferrer" className="bg-dark-card rounded-3xl p-5 flex flex-col justify-center gap-3 hover:bg-white/5 transition-colors group h-full">
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary-light">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-[var(--color-text-light)]">LinkedIn</h3>
+                  <p className="text-xs text-gray-400 mt-1 truncate">Mitzi Iparraguirre</p>
+                </div>
+              </a>
+            </div>
+
+            {/* Bottom Bar - Contact Info */}
+            <div className="bg-dark-card rounded-3xl p-4 sm:p-5 flex flex-wrap xl:flex-nowrap items-center justify-between gap-3 flex-[0.8]">
+              <div className="flex flex-wrap items-center gap-3 w-full justify-between lg:justify-start lg:gap-4">
+                <div className="flex items-center gap-2">
+                  <div className="text-primary-light"><Phone size={16} /></div>
+                  <span className="text-[11px] sm:text-xs text-gray-300 font-medium whitespace-nowrap">+51 962 180 847</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="text-primary-light"><MapPin size={16} /></div>
+                  <span className="text-[11px] sm:text-xs text-gray-300 font-medium whitespace-nowrap">Huancayo, Perú</span>
+                </div>
+                
+                <div className="flex items-center gap-2 bg-white/5 py-2 px-3 sm:px-4 rounded-full w-full xl:w-auto justify-center mt-2 xl:mt-0 xl:ml-auto">
+                  <div className="text-primary-light"><Calendar size={14} /></div>
+                  <span className="text-[11px] sm:text-xs text-gray-300 font-medium whitespace-nowrap">Disponible para proyectos</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
         </div>
-      </div>
-
-      {/* Vertical Social Links Sidebar */}
-      <div className="fixed right-4 lg:right-10 top-1/2 -translate-y-1/2 hidden md:flex flex-col items-center gap-10 z-50">
-        <div className="w-[1px] h-16 bg-gradient-to-b from-transparent to-white/20"></div>
-
-        <a href="#" className="flex flex-col items-center gap-2 group">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary group-hover:text-white transition-colors">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
-          </svg>
-          <span className="text-[9px] font-bold tracking-[0.2em] text-white/50 group-hover:text-white transition-colors font-outfit uppercase">
-            LinkedIn
-          </span>
-        </a>
-
-        <a href="#" className="flex flex-col items-center gap-2 group">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary group-hover:text-white transition-colors">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-          <span className="text-[9px] font-bold tracking-[0.2em] text-white/50 group-hover:text-white transition-colors font-outfit uppercase">
-            INSTAGRAMA
-          </span>
-        </a>
-
-        <a href="#" className="flex flex-col items-center gap-2 group">
-          <Mail size={20} className="text-primary group-hover:text-white transition-colors" />
-          <span className="text-[9px] font-bold tracking-[0.2em] text-white/50 group-hover:text-white transition-colors font-outfit uppercase">
-            Email
-          </span>
-        </a>
-
-        <div className="w-[1px] h-16 bg-gradient-to-t from-transparent to-white/20"></div>
       </div>
     </section>
   );
