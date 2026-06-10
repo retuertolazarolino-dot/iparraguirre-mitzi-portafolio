@@ -50,7 +50,7 @@ const Hero = () => {
               boxShadow: "inset 0 0 0 2px rgba(217, 172, 242, 0.3)", // Light fuxia subtle border
             }}
             transition={{ duration: 0.6 }}
-            className="bg-dark-card rounded-3xl p-2 h-full min-h-[350px] sm:min-h-[400px] lg:min-h-[600px] relative overflow-hidden"
+            className="bg-dark-card rounded-3xl p-2 h-[400px] sm:h-[450px] lg:h-full lg:min-h-[600px] relative overflow-hidden"
           >
             {/* Inner purple glow gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-transparent opacity-50 z-0 pointer-events-none"></div>
@@ -89,7 +89,7 @@ const Hero = () => {
                 </div>
               </div>
 
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-sans font-bold leading-[1.05] tracking-tight mb-6 relative z-10 break-words w-full">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-sans font-bold leading-[1.05] tracking-tight mb-6 relative z-10 break-words w-full">
                 <span className="text-[var(--color-text-light)] block">MITZI</span>
                 <span className="block bg-gradient-to-r from-[#E2B2F4] to-[#A669D7] bg-clip-text text-transparent">IPARRAGUIRRE</span>
               </h1>
