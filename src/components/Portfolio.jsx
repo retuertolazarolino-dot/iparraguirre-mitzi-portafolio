@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Sparkles, MessageSquareHeart, Clapperboard, Star, LayoutTemplate, Play, Flower } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useModal } from '../context/ModalContext';
 
 const socialMediaCards = [
   {
@@ -45,6 +46,7 @@ const videoCards = [
 ];
 
 const Portfolio = () => {
+  const { openContactModal } = useModal();
   return (
     <section id="portfolio" className="bg-dark w-full pb-5 px-3 md:px-4 flex justify-center">
       <div className="w-full max-w-[1800px] mx-auto">
@@ -215,7 +217,7 @@ const Portfolio = () => {
                    <div className="absolute top-6 left-6 text-white text-xs font-bold tracking-widest">EXELTA GROUP</div>
                    <div className="relative z-10 w-2/3">
                      <h4 className="text-white text-xl md:text-2xl font-bold leading-tight mb-4">Estrategia <span className="text-primary-light">digital</span> que impulsa tu negocio.</h4>
-                     <button className="bg-primary-light/20 border border-primary-light/50 text-primary-light text-[10px] px-4 py-1.5 rounded-full font-bold uppercase tracking-wider">CONOCE MÁS</button>
+                     <button onClick={openContactModal} className="cursor-pointer hover:bg-primary-light/30 transition-colors bg-primary-light/20 border border-primary-light/50 text-primary-light text-[10px] px-4 py-1.5 rounded-full font-bold uppercase tracking-wider relative z-20">CONOCE MÁS</button>
                    </div>
                 </motion.div>
                 
@@ -225,7 +227,7 @@ const Portfolio = () => {
                    </div>
                    <div className="relative z-10 w-2/3">
                      <h4 className="text-[#333] text-xl md:text-2xl font-bold leading-tight mb-4">Bienestar emocional para una vida plena.</h4>
-                     <button className="bg-[#8a4fff] text-white text-[10px] px-4 py-1.5 rounded-full font-bold uppercase tracking-wider">AGENDA TU CITA</button>
+                     <button onClick={openContactModal} className="cursor-pointer hover:bg-[#723bc4] transition-colors bg-[#8a4fff] text-white text-[10px] px-4 py-1.5 rounded-full font-bold uppercase tracking-wider relative z-20">AGENDA TU CITA</button>
                    </div>
                 </motion.div>
               </div>

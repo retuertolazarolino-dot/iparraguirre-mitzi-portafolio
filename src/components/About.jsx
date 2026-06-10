@@ -13,21 +13,21 @@ const About = () => {
   ];
 
   const tools = [
-    { name: 'Figma', badge: 'F', bg: '#1E1E1E', color: '#F24E1E' },
-    { name: 'Canva', badge: 'C', bg: '#00C4CC', color: '#fff' },
-    { name: 'Illustrator', badge: 'Ai', bg: '#330000', color: '#FF9A00' },
-    { name: 'Photoshop', badge: 'Ps', bg: '#001E36', color: '#31A8FF' },
-    { name: 'CapCut', badge: '✂', bg: '#000', color: '#fff' },
-    { name: 'Premiere Pro', badge: 'Pr', bg: '#00005B', color: '#9999FF' },
-    { name: 'After Effects', badge: 'Ae', bg: '#00005B', color: '#9999FF' },
-    { name: 'Midjourney', badge: '◆', bg: '#000', color: '#fff' },
-    { name: 'Google Analytics', badge: '📊', bg: 'transparent', color: '#E37400' },
-    { name: 'Meta Business Suite', badge: '∞', bg: '#0082FB', color: '#fff' },
-    { name: 'Notion', badge: 'N', bg: '#000', color: '#fff' },
-    { name: 'Google Workspace', badge: 'G', bg: '#4285F4', color: '#fff' },
-    { name: 'Asana', badge: '⬡', bg: '#F06A6A', color: '#fff' },
-    { name: 'ChatGPT', badge: '◎', bg: '#10A37F', color: '#fff' },
-    { name: 'Metricool', badge: 'M', bg: '#07C586', color: '#fff' },
+    { name: 'Figma', icon: 'https://cdn.simpleicons.org/figma/F24E1E' },
+    { name: 'Canva', icon: 'https://cdn.simpleicons.org/canva/00C4CC' },
+    { name: 'Illustrator', icon: 'https://cdn.simpleicons.org/adobeillustrator/FF9A00' },
+    { name: 'Photoshop', icon: 'https://cdn.simpleicons.org/adobephotoshop/31A8FF' },
+    { name: 'CapCut', icon: 'https://www.google.com/s2/favicons?domain=capcut.com&sz=128' },
+    { name: 'Premiere Pro', icon: 'https://cdn.simpleicons.org/adobepremierepro/9999FF' },
+    { name: 'After Effects', icon: 'https://cdn.simpleicons.org/adobeaftereffects/9999FF' },
+    { name: 'Midjourney', icon: 'https://cdn.simpleicons.org/midjourney/FFFFFF' },
+    { name: 'Google Analytics', icon: 'https://www.google.com/s2/favicons?domain=analytics.google.com&sz=128' },
+    { name: 'Meta Business Suite', icon: 'https://cdn.simpleicons.org/meta/1877F2' },
+    { name: 'Notion', icon: 'https://cdn.simpleicons.org/notion/FFFFFF' },
+    { name: 'Google Workspace', icon: 'https://www.google.com/s2/favicons?domain=workspace.google.com&sz=128' },
+    { name: 'Asana', icon: 'https://cdn.simpleicons.org/asana/F06A6A' },
+    { name: 'ChatGPT', icon: 'https://cdn.simpleicons.org/openai/10A37F' },
+    { name: 'Metricool', icon: 'https://www.google.com/s2/favicons?domain=metricool.com&sz=128' },
   ];
 
   return (
@@ -48,22 +48,33 @@ const About = () => {
               <Zap size={24} className="text-primary-light/50" />
             </div>
             
-            <div className="flex flex-col gap-3">
+            <motion.div 
+              className="flex flex-col gap-3"
+              variants={{
+                hidden: { opacity: 0 },
+                show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+              }}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
               {skillsGrid.map((row, rowIndex) => (
-                <div key={rowIndex} className="flex gap-2 lg:gap-3 w-full">
+                <motion.div key={rowIndex} className="flex gap-2 lg:gap-3 w-full" variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}>
                   {row.map((skill, colIndex) => (
-                    <div 
+                    <motion.div 
                       key={colIndex} 
-                      className="bg-primary-light/90 hover:bg-primary-light transition-colors rounded-full py-2.5 flex-1 flex items-center justify-center"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="bg-primary-light/90 hover:bg-primary-light transition-colors rounded-full py-2.5 flex-1 flex items-center justify-center cursor-default shadow-sm"
                     >
                       <span className="text-[9px] sm:text-[10px] md:text-[11px] font-bold text-dark tracking-wide text-center px-1">
                         {skill}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Card 2: HERRAMIENTAS */}
@@ -79,19 +90,33 @@ const About = () => {
               <Monitor size={24} className="text-primary-light/50" />
             </div>
             
-            <div className="flex flex-wrap gap-3">
+            <motion.div 
+              className="flex flex-wrap gap-3"
+              variants={{
+                hidden: { opacity: 0 },
+                show: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.3 } }
+              }}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
               {tools.map((tool, index) => (
-                <div key={index} className="flex items-center gap-3 bg-[#101114] border border-white/5 rounded-full px-4 py-2 md:py-2.5 hover:border-primary/40 transition-colors">
-                  <div 
-                    className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center rounded text-[10px] md:text-[11px] font-bold shrink-0"
-                    style={{ backgroundColor: tool.bg, color: tool.color }}
-                  >
-                    {tool.badge}
-                  </div>
+                <motion.div 
+                  key={index} 
+                  variants={{ hidden: { opacity: 0, scale: 0.8 }, show: { opacity: 1, scale: 1 } }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="flex items-center gap-3 bg-[#101114] border border-white/5 rounded-full px-4 py-2 md:py-2.5 hover:border-primary/40 transition-colors cursor-default"
+                >
+                  <img 
+                    src={tool.icon} 
+                    alt={tool.name} 
+                    className="w-5 h-5 md:w-6 md:h-6 object-contain"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
                   <span className="text-xs md:text-[13px] font-medium text-gray-300">{tool.name}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Card 3: FORMACIÓN */}

@@ -1,33 +1,73 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight, Heart, Mail, Globe, MapPin, Calendar, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const images = [
+  "/assets/images/foto-hero.webp",
+  "/assets/images/mitzi-iparraguirre-foto.webp",
+  "/assets/images/mitzi-iparraguirre-foto-casual.webp",
+  "/assets/images/mitzi-iparraguirre-foto-profesional.webp"
+];
+
+const bannerTexts = [
+  "Estrategia digital & comunicación",
+  "Diseño y creación de contenido",
+  "Gestión de redes sociales",
+  "Análisis de datos y métricas"
+];
+
 const Hero = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRef = useRef(null);
+
+  // Parallax effect for the image column
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    }, 4000); // Cambia cada 4 segundos
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section id="home" className="bg-dark w-full pt-32 pb-5 px-3 md:px-4 flex justify-center">
+    <section id="home" ref={containerRef} className="bg-dark w-full pt-32 pb-5 px-3 md:px-4 flex justify-center overflow-hidden">
       <div className="w-full max-w-[1800px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.5fr_1.8fr] gap-3 md:gap-4 items-stretch h-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.7fr_1.3fr] xl:grid-cols-[1.1fr_1.6fr_1.4fr] gap-3 md:gap-4 items-stretch h-full">
 
           {/* Left Column - Image Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-dark-card rounded-3xl p-2 h-full min-h-[500px] lg:min-h-[600px] relative overflow-hidden"
             style={{
+              y: imageY,
               boxShadow: "inset 0 0 0 2px rgba(217, 172, 242, 0.3)", // Light fuxia subtle border
             }}
+            transition={{ duration: 0.6 }}
+            className="bg-dark-card rounded-3xl p-2 h-full min-h-[350px] sm:min-h-[400px] lg:min-h-[600px] relative overflow-hidden"
           >
             {/* Inner purple glow gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-transparent opacity-50 z-0"></div>
-            
-            <img
-              src="/assets/images/foto-hero.webp"
-              alt="Mitzi Iparraguirre"
-              className="w-full h-full object-cover rounded-[1.25rem] relative z-10 object-top"
-              onError={(e) => { e.target.style.display = 'none'; }}
-            />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-transparent opacity-50 z-0 pointer-events-none"></div>
+
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentIndex}
+                src={images[currentIndex]}
+                alt="Mitzi Iparraguirre"
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+                className="absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] object-cover rounded-[1.25rem] z-10 object-top"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
+            </AnimatePresence>
           </motion.div>
 
           {/* Middle Column - Text Info */}
@@ -35,12 +75,12 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-dark-card rounded-3xl p-6 lg:p-8 flex flex-col justify-between h-full relative"
+            className="bg-dark-card rounded-3xl p-6 lg:p-8 flex flex-col justify-between h-full relative overflow-hidden"
           >
             <div>
               <div className="flex items-center justify-between mb-8">
-                <div className="bg-white/5 border border-white/10 rounded-full px-5 py-2">
-                  <span className="text-[11px] font-bold tracking-[0.15em] text-gray-300 font-outfit uppercase">
+                <div className="bg-white/5 border border-white/10 rounded-full px-4 sm:px-5 py-2">
+                  <span className="text-[9px] sm:text-[11px] font-bold tracking-[0.15em] text-gray-300 font-outfit uppercase">
                     Estrategia • Contenido • Diseño
                   </span>
                 </div>
@@ -49,14 +89,25 @@ const Hero = () => {
                 </div>
               </div>
 
-              <h1 className="text-5xl md:text-6xl xl:text-7xl font-sans font-bold leading-[1.1] tracking-tight mb-6">
+              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-sans font-bold leading-[1.05] tracking-tight mb-6 relative z-10 break-words w-full">
                 <span className="text-[var(--color-text-light)] block">MITZI</span>
                 <span className="block bg-gradient-to-r from-[#E2B2F4] to-[#A669D7] bg-clip-text text-transparent">IPARRAGUIRRE</span>
               </h1>
 
-              <h2 className="text-xl md:text-2xl font-semibold mb-6 text-[var(--color-text-light)]">
-                Estrategia digital & comunicación
-              </h2>
+              <div className="h-[32px] md:h-[40px] mb-6 flex items-center">
+                <AnimatePresence mode="wait">
+                  <motion.h2
+                    key={currentIndex}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-xl md:text-2xl font-semibold text-[var(--color-text-light)] m-0"
+                  >
+                    {bannerTexts[currentIndex]}
+                  </motion.h2>
+                </AnimatePresence>
+              </div>
 
               <div className="space-y-4 text-gray-400 text-sm md:text-base font-outfit font-light leading-relaxed mb-10 max-w-md">
                 <p>
@@ -68,7 +119,7 @@ const Hero = () => {
               </div>
             </div>
 
-            <Link to="/mis-proyectos" className="group flex items-center gap-3 bg-primary-light text-dark hover:bg-white px-6 py-4 rounded-full font-bold transition-all duration-300 uppercase tracking-widest text-xs w-max mt-4">
+            <Link to="/mis-proyectos" className="group flex items-center gap-3 bg-primary-light text-dark hover:bg-white px-6 py-4 rounded-full font-bold transition-all duration-300 uppercase tracking-widest text-xs w-max mt-4 relative z-10">
               Ver Proyectos
               <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} strokeWidth={2} />
             </Link>
@@ -147,14 +198,14 @@ const Hero = () => {
               <div className="flex flex-wrap items-center gap-3 w-full justify-between lg:justify-start lg:gap-4">
                 <div className="flex items-center gap-2">
                   <div className="text-primary-light"><Phone size={16} /></div>
-                  <span className="text-[11px] sm:text-xs text-gray-300 font-medium whitespace-nowrap">+51 962 180 847</span>
+                  <span className="text-[11px] sm:text-xs text-gray-300 font-medium whitespace-nowrap">+51 907 459 557</span>
                 </div>
-                
+
                 <div className="flex items-center gap-2">
                   <div className="text-primary-light"><MapPin size={16} /></div>
                   <span className="text-[11px] sm:text-xs text-gray-300 font-medium whitespace-nowrap">Huancayo, Perú</span>
                 </div>
-                
+
                 <div className="flex items-center gap-2 bg-white/5 py-2 px-3 sm:px-4 rounded-full w-full xl:w-auto justify-center mt-2 xl:mt-0 xl:ml-auto">
                   <div className="text-primary-light"><Calendar size={14} /></div>
                   <span className="text-[11px] sm:text-xs text-gray-300 font-medium whitespace-nowrap">Disponible para proyectos</span>

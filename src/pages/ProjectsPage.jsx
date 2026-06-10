@@ -110,25 +110,72 @@ const ProjectsPage = ({ onOpenVideo }) => {
     }
   }, [location]);
 
+const CarouselColumn = ({ images, speed = 20, direction = "up" }) => {
+  return (
+    <div className="relative overflow-hidden h-full w-full rounded-2xl">
+      <motion.div
+        animate={{ y: direction === "up" ? ["0%", "-50%"] : ["-50%", "0%"] }}
+        transition={{ ease: "linear", duration: speed, repeat: Infinity }}
+        className="flex flex-col gap-4 w-full"
+      >
+        {[...images, ...images].map((img, i) => (
+          <div key={i} className="w-full aspect-[4/5] rounded-xl overflow-hidden shrink-0 border border-white/10 bg-dark-card group">
+            <img src={`/assets/images/${img}`} alt="mockup" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
   return (
     <div className="bg-dark min-h-screen">
       {/* Header */}
-      <section className="pt-32 pb-16 border-b border-white/5 px-3 md:px-4">
+      <section className="pt-24 pb-12 md:pt-32 md:pb-16 border-b border-white/5 px-3 md:px-4 relative overflow-hidden">
         <div className="container mx-auto px-4 md:px-8">
-          <Link to="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary transition-colors mb-12 font-outfit text-xs tracking-widest uppercase">
-            <ArrowLeft size={16} /> Volver al Inicio
-          </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left side text */}
+            <div className="z-10 relative">
+              <Link to="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-primary transition-colors mb-8 md:mb-12 font-outfit text-xs tracking-widest uppercase">
+                <ArrowLeft size={16} /> Volver al Inicio
+              </Link>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-6xl md:text-8xl font-display font-bold text-white uppercase leading-none tracking-tight"
-          >
-            Mis <span className="text-primary">Proyectos</span>
-          </motion.h1>
-          <p className="text-gray-400 font-outfit font-light mt-6 max-w-2xl leading-relaxed">
-            Una recopilación de mi trabajo en diferentes áreas de marketing digital, diseño y creación de contenido.
-          </p>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-6xl md:text-7xl lg:text-8xl font-display font-bold text-white uppercase leading-[0.9] tracking-tight"
+              >
+                Mis <br/><span className="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-[#d8b4e2]">Proyectos</span>
+              </motion.h1>
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-gray-400 font-outfit font-light mt-6 max-w-xl leading-relaxed md:text-lg"
+              >
+                Una recopilación de mi trabajo en diferentes áreas de marketing digital, diseño y creación de contenido.
+              </motion.p>
+            </div>
+
+            {/* Right side Carousel */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 h-[400px] md:h-[500px] lg:h-[600px] relative z-0 overflow-hidden rounded-3xl"
+            >
+               {/* Fade masks for top and bottom of the carousel */}
+               <div className="absolute top-0 left-0 w-full h-32 md:h-40 bg-gradient-to-b from-[#0D1013] via-[#0D1013]/80 to-transparent z-10 pointer-events-none" />
+               <div className="absolute bottom-0 left-0 w-full h-32 md:h-40 bg-gradient-to-t from-[#0D1013] via-[#0D1013]/80 to-transparent z-10 pointer-events-none" />
+               
+               <CarouselColumn images={['personal_1.png', 'exelta_mockup.png', 'avanti_mockup.png', 'personal_2.png']} speed={30} direction="up" />
+               <CarouselColumn images={['triad_mockup.png', 'personal_3.png', 'personal_1.png', 'exelta_mockup.png']} speed={35} direction="down" />
+               <div className="hidden sm:block">
+                 <CarouselColumn images={['avanti_mockup.png', 'personal_2.png', 'triad_mockup.png', 'personal_3.png']} speed={25} direction="up" />
+               </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 

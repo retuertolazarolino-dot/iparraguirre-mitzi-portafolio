@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useModal } from '../context/ModalContext';
 
 const WebDesign = () => {
+  const { openContactModal } = useModal();
   return (
     <section id="web-design" className="bg-[#050505] overflow-hidden py-12 border-t border-white/5 border-b pb-24">
       <div className="container mx-auto px-4 md:px-8">
@@ -79,13 +81,13 @@ const WebDesign = () => {
                 </div>
 
                 {/* Hero Mock */}
-                <div className="flex-1 flex flex-col justify-center z-10">
-                  <h4 className="text-white font-display text-xl md:text-3xl leading-none mb-4 w-3/4">
+                <div className="flex-1 flex flex-col justify-center z-10 w-[90%] md:w-3/4">
+                  <h4 className="text-white font-display text-2xl sm:text-3xl md:text-4xl leading-none mb-4">
                     Estrategia <span className="text-primary">digital</span> que impulsa tu negocio.
                   </h4>
-                  <div className="w-20 h-6 rounded-md bg-primary/20 border border-primary/50 flex items-center justify-center">
-                    <span className="text-primary text-[6px] tracking-widest font-bold">HABLEMOS</span>
-                  </div>
+                  <button onClick={openContactModal} className="cursor-pointer hover:bg-primary/30 transition-colors w-24 md:w-28 h-8 md:h-10 rounded-md bg-primary/20 border border-primary/50 flex items-center justify-center relative z-20">
+                    <span className="text-primary text-[8px] md:text-[10px] tracking-widest font-bold">HABLEMOS</span>
+                  </button>
                 </div>
 
                 {/* Decor elements */}
@@ -123,13 +125,13 @@ const WebDesign = () => {
                 </div>
 
                 {/* Hero Mock */}
-                <div className="flex-1 flex flex-col justify-center z-10 w-2/3">
-                  <h4 className="text-black font-display text-2xl md:text-3xl leading-[1.1] mb-4">
+                <div className="flex-1 flex flex-col justify-center z-10 w-[80%] md:w-2/3">
+                  <h4 className="text-black font-display text-xl sm:text-2xl md:text-3xl leading-[1.1] mb-4">
                     Bienestar emocional para una vida plena.
                   </h4>
-                  <div className="w-24 h-6 rounded-md bg-[#4c1d95] flex items-center justify-center">
-                    <span className="text-white text-[6px] tracking-widest font-bold">AGENDA TU CITA</span>
-                  </div>
+                  <button onClick={openContactModal} className="cursor-pointer hover:bg-[#3b1773] transition-colors w-28 md:w-32 h-8 md:h-10 rounded-md bg-[#4c1d95] flex items-center justify-center relative z-20">
+                    <span className="text-white text-[8px] md:text-[10px] tracking-widest font-bold">AGENDA TU CITA</span>
+                  </button>
                 </div>
 
                 {/* Plant element (Simulated with SVG leaves) */}

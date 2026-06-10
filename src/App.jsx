@@ -4,6 +4,9 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ProjectsPage from './pages/ProjectsPage';
 import VideoModal from './components/VideoModal';
+import ContactModal from './components/ContactModal';
+import CustomCursor from './components/CustomCursor';
+import { ModalProvider } from './context/ModalContext';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,23 +18,27 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="bg-dark min-h-screen text-white">
-        <Navbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home onOpenVideo={openVideo} />} />
-            <Route path="/mis-proyectos" element={<ProjectsPage onOpenVideo={openVideo} />} />
-          </Routes>
-        </main>
-        
-        <VideoModal 
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
-          videoUrl={currentVideo} 
-        />
-      </div>
-    </Router>
+    <ModalProvider>
+      <Router>
+        <div className="bg-dark min-h-screen text-white">
+          <Navbar />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home onOpenVideo={openVideo} />} />
+              <Route path="/mis-proyectos" element={<ProjectsPage onOpenVideo={openVideo} />} />
+            </Routes>
+          </main>
+          
+          <VideoModal 
+            isOpen={isModalOpen} 
+            onClose={() => setIsModalOpen(false)} 
+            videoUrl={currentVideo} 
+          />
+          <ContactModal />
+          <CustomCursor />
+        </div>
+      </Router>
+    </ModalProvider>
   );
 }
 

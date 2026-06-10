@@ -78,9 +78,10 @@ const Experience = () => {
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: -5 }}
                   transition={{ duration: 0.6, delay: index * 0.15 }}
                   viewport={{ once: true }}
-                  className="flex flex-col h-full"
+                  className="flex flex-col h-full bg-white/[0.02] hover:bg-white/[0.05] p-4 rounded-2xl transition-colors border border-transparent hover:border-white/10"
                 >
                   <div className="mb-4">
                     <span className="text-primary-light font-medium text-sm lg:text-[15px] tracking-wide block mb-1">

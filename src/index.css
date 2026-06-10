@@ -20,6 +20,10 @@
   }
   body {
     @apply bg-dark text-[var(--color-text-light)] font-sans antialiased;
+    cursor: none;
+  }
+  a, button, input, textarea, select, [role="button"] {
+    cursor: none !important;
   }
   section, footer {
     scroll-margin-top: 6rem;
