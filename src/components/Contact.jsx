@@ -23,7 +23,7 @@ const Contact = () => {
       <div className="w-full max-w-[1800px] mx-auto">
         
         {/* Contact Banner */}
-        <div className="bg-dark-card rounded-[2rem] py-8 px-8 md:px-10 flex flex-col xl:flex-row items-center xl:items-start justify-between gap-6 xl:gap-8 mb-5 shadow-xl">
+        <div className="bg-dark-card rounded-[2rem] py-8 px-6 md:px-10 flex flex-col items-center justify-between gap-8 lg:gap-6 xl:flex-row xl:items-start mb-5 shadow-xl">
           
           {/* 1. Título */}
           <div className="flex flex-col items-center text-center xl:text-left xl:items-start gap-2 shrink-0 xl:w-1/4">
@@ -38,18 +38,18 @@ const Contact = () => {
           </div>
 
           {/* 2. Primer Párrafo */}
-          <div className="text-center xl:text-left xl:w-1/4">
+          <div className="text-center xl:text-left max-w-xs xl:max-w-none xl:w-1/4">
             <p className="text-gray-400 font-outfit text-[13px] md:text-[14px] leading-relaxed">
               Me gusta transformar desafíos en soluciones digitales mediante estrategia, contenido y experiencias centradas en las personas.
             </p>
           </div>
 
           {/* 3. Segundo Párrafo y Botón */}
-          <div className="flex flex-col items-center xl:items-start gap-4 text-center xl:text-left xl:w-1/4">
+          <div className="flex flex-col items-center xl:items-start gap-4 text-center xl:text-left max-w-xs xl:max-w-none xl:w-1/4">
             <p className="text-gray-300 font-outfit text-[13px] md:text-[14px] leading-relaxed font-medium">
               Si buscas aportar valor a tu marca o desarrollar un proyecto con propósito...
             </p>
-            <button 
+            <button
               onClick={() => setIsModalOpen(true)}
               className="group flex items-center justify-center gap-2 bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 text-[var(--color-text-light)] px-6 py-3 rounded-xl font-sans font-bold text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 w-max"
             >
@@ -59,7 +59,7 @@ const Contact = () => {
           </div>
 
           {/* 4. Links */}
-          <div className="flex items-center justify-center xl:justify-center gap-3 sm:gap-4 shrink-0 xl:w-1/4 my-auto h-full">
+          <div className="flex items-center justify-center gap-4 shrink-0 xl:w-1/4">
             {/* WhatsApp */}
             <a href="https://wa.me/51907459557" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center border border-white/10 rounded-full text-white bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 transition-all shadow-lg hover:scale-105">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -110,8 +110,8 @@ const Contact = () => {
 
       {/* Modal de Contacto */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/70 backdrop-blur-sm">
-          <div className="bg-[#1a1a24] border border-white/10 rounded-2xl p-6 w-full max-w-md relative animate-in fade-in zoom-in duration-300">
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-8 bg-black/70 backdrop-blur-sm overflow-y-auto">
+          <div className="bg-[#1a1a24] border border-white/10 rounded-2xl p-5 sm:p-6 w-full max-w-md relative my-auto animate-in fade-in zoom-in duration-300">
             <button 
               onClick={() => setIsModalOpen(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"

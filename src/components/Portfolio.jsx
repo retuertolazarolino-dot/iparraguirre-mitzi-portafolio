@@ -64,7 +64,7 @@ const TikTokModal = ({ video, onClose }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={handleClose}
-          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 backdrop-blur-md p-2 sm:p-4"
         >
           <motion.div
             initial={{ scale: 0.92, opacity: 0, y: 20 }}
@@ -72,22 +72,22 @@ const TikTokModal = ({ video, onClose }) => {
             exit={{ scale: 0.92, opacity: 0, y: 20 }}
             transition={{ type: 'spring', damping: 24, stiffness: 280 }}
             onClick={(e) => e.stopPropagation()}
-            className="relative flex flex-col items-center gap-3 w-full max-w-[380px]"
+            className="relative flex flex-col items-center gap-2 sm:gap-3 w-full max-w-[340px] sm:max-w-[380px]"
           >
             {/* Header del modal */}
-            <div className="w-full flex items-center justify-between px-1">
-              <div className="flex items-center gap-2">
+            <div className="w-full flex items-center justify-between px-1 gap-2">
+              <div className="flex items-center gap-2 min-w-0">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.76a4.83 4.83 0 0 1-1.01-.07z"/>
                 </svg>
-                <span className="text-white font-sans font-semibold text-sm tracking-wide">{video.title}</span>
+                <span className="text-white font-sans font-semibold text-xs sm:text-sm tracking-wide truncate">{video.title}</span>
               </div>
               <div className="flex items-center gap-2">
                 <a
                   href={video.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-[#9b51e0] hover:text-[#c77dff] transition-colors font-sans font-bold text-[10px] tracking-widest"
+                  className="hidden xs:flex items-center gap-1 text-[#9b51e0] hover:text-[#c77dff] transition-colors font-sans font-bold text-[10px] tracking-widest shrink-0"
                   onClick={(e) => e.stopPropagation()}
                 >
                   VER EN TIKTOK <ExternalLink size={12} />
@@ -104,7 +104,7 @@ const TikTokModal = ({ video, onClose }) => {
             {/* Contenido: iframe o fallback */}
             <div
               className="w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black flex flex-col items-center justify-center"
-              style={{ height: 'min(75vh, 680px)' }}
+              style={{ height: 'min(72vh, 680px)' }}
             >
               {iframeError ? (
                 /* Fallback cuando el video no permite embed */
@@ -170,7 +170,7 @@ const TikTokCard = ({ videoId, url, title, account, onOpen }) => (
     className="bg-[#0f0f15] rounded-2xl overflow-hidden border border-white/8 shadow-lg flex flex-col cursor-pointer group hover:border-[#9b51e0]/40 transition-all duration-300"
   >
     {/* Preview area */}
-    <div className="relative flex-1 min-h-[260px] bg-gradient-to-br from-[#1a1030] to-[#0d0d18] flex flex-col items-center justify-center gap-5 p-6">
+    <div className="relative flex-1 min-h-[200px] sm:min-h-[240px] bg-gradient-to-br from-[#1a1030] to-[#0d0d18] flex flex-col items-center justify-center gap-4 sm:gap-5 p-4 sm:p-6">
       {/* Glow de fondo */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(ellipse_at_center,_rgba(155,81,224,0.15)_0%,_transparent_70%)]" />
 
@@ -301,12 +301,12 @@ const Portfolio = () => {
       <div className="w-full max-w-[1800px] mx-auto">
         <div className="bg-dark-card rounded-3xl p-6 md:p-8 lg:p-10 w-full overflow-hidden">
 
-          {/* Header */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12">
+          {/* Header - apila en móvil, fila en desktop */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-12">
             <div className="flex items-start gap-4">
-              <Sparkles size={36} className="text-primary-light shrink-0" strokeWidth={1.5} />
+              <Sparkles size={32} className="text-primary-light shrink-0 mt-0.5" strokeWidth={1.5} />
               <div>
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-sans font-medium text-[var(--color-text-light)] uppercase tracking-wide mb-2">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-sans font-medium text-[var(--color-text-light)] uppercase tracking-wide mb-2">
                   PROYECTOS SELECCIONADOS
                 </h2>
                 <p className="text-gray-400 font-outfit text-sm font-light">
@@ -316,10 +316,10 @@ const Portfolio = () => {
             </div>
             <button
               onClick={() => setIsContactOpen(true)}
-              className="group flex items-center justify-center gap-2 bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 text-white rounded-full px-6 py-3 font-sans font-bold transition-all duration-300 uppercase tracking-widest text-[11px] min-w-max shadow-[0_0_20px_rgba(155,81,224,0.3)] hover:shadow-[0_0_30px_rgba(155,81,224,0.5)]"
+              className="group self-start sm:self-auto flex items-center justify-center gap-2 bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 text-white rounded-full px-5 py-2.5 sm:px-6 sm:py-3 font-sans font-bold transition-all duration-300 uppercase tracking-widest text-[10px] sm:text-[11px] min-w-max shadow-[0_0_20px_rgba(155,81,224,0.3)] hover:shadow-[0_0_30px_rgba(155,81,224,0.5)]"
             >
               HAGAMOS ALGO JUNTOS
-              <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} strokeWidth={2} />
+              <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={15} strokeWidth={2} />
             </button>
           </div>
 
@@ -437,8 +437,8 @@ const Portfolio = () => {
 
       {/* Modal de Contacto */}
       {isContactOpen && (
-        <div className="fixed inset-0 z-[1000] flex items-center justify-center px-4 bg-black/70 backdrop-blur-sm">
-          <div className="bg-[#1a1a24] border border-white/10 rounded-2xl p-6 w-full max-w-md relative">
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center px-4 py-8 bg-black/70 backdrop-blur-sm overflow-y-auto">
+          <div className="bg-[#1a1a24] border border-white/10 rounded-2xl p-5 sm:p-6 w-full max-w-md relative my-auto">
             <button onClick={() => setIsContactOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
               <X size={20} />
             </button>
