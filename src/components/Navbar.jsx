@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -7,12 +7,29 @@ const Navbar = () => {
   const location = useLocation();
 
   const navLinks = [
-    { name: 'INICIO', href: '/#home' },
-    { name: 'SOBRE MÍ', href: '/#about' },
-    { name: 'EXPERIENCIA', href: '/#experience' },
-    { name: 'PROYECTOS', href: '/#portfolio' },
-    { name: 'CONTACTO', href: '/#contact' },
+    { name: 'INICIO', href: '/#home', id: 'home' },
+    { name: 'SOBRE MÍ', href: '/#about', id: 'about' },
+    { name: 'EXPERIENCIA', href: '/#experience', id: 'experience' },
+    { name: 'PROYECTOS', href: '/#portfolio', id: 'portfolio' },
+    { name: 'CONTACTO', href: '/#contact', id: 'contact' },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      
+      for (let i = navLinks.length - 1; i >= 0; i--) {
+        const section = document.getElementById(navLinks[i].id);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActive(navLinks[i].name);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -21,7 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-[100] bg-black/80 backdrop-blur-md">
+    <nav className="fixed top-0 w-full z-[100] bg-dark">
       <div className="container mx-auto px-6 md:px-10 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Logo Section */}
@@ -59,7 +76,7 @@ const Navbar = () => {
                   className="relative group py-2"
                 >
                   <span className={`text-[11px] font-bold tracking-[0.15em] font-outfit transition-colors duration-300 ${
-                    (location.pathname === link.href || (location.pathname === '/' && link.href.includes('#'))) ? 'text-primary' : 'text-white hover:text-white/70'
+                    active === link.name ? 'text-primary' : 'text-white hover:text-white/70'
                   }`}>
                     {link.name}
                   </span>
@@ -145,7 +162,7 @@ const Navbar = () => {
                       className="group flex items-center justify-between p-4 rounded-2xl hover:bg-white/5 transition-all duration-300"
                     >
                       <span className={`text-sm font-bold tracking-[0.15em] font-outfit transition-colors duration-300 ${
-                        (location.pathname === link.href || (location.pathname === '/' && link.href.includes('#'))) ? 'text-primary' : 'text-gray-300 group-hover:text-white'
+                        active === link.name ? 'text-primary' : 'text-gray-300 group-hover:text-white'
                       }`}>
                         {link.name}
                       </span>

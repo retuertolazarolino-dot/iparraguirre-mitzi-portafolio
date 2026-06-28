@@ -21,7 +21,7 @@ const About = () => {
   const tools = [
     // Row 1 - Design
     { name: 'Figma', icon: 'https://cdn.simpleicons.org/figma/F24E1E' },
-    { name: 'Canva', icon: 'https://cdn.simpleicons.org/canva/00C4CC' },
+    { name: 'Canva', icon: '/assets/logo/icons8-canva-48 1.svg' },
     { name: 'CapCut', icon: 'https://www.google.com/s2/favicons?domain=capcut.com&sz=128' },
     // Row 2 - Analytics & Ads
     { name: 'Google Analytics', icon: 'https://www.google.com/s2/favicons?domain=analytics.google.com&sz=128' },
@@ -29,7 +29,7 @@ const About = () => {
     { name: 'Metricool', icon: 'https://www.google.com/s2/favicons?domain=metricool.com&sz=128' },
     // Row 3 - Social & AI
     { name: 'Meta Business Suite', icon: 'https://cdn.simpleicons.org/meta/1877F2' },
-    { name: 'ChatGPT', icon: 'https://cdn.simpleicons.org/openai/10A37F' },
+    { name: 'ChatGPT', icon: '/assets/logo/icons8-chat-gpt-48 1.svg' },
     { name: 'Claude', icon: 'https://cdn.simpleicons.org/anthropic/D97757' },
     // Row 4 - Productivity
     { name: 'Google Workspace', icon: 'https://www.google.com/s2/favicons?domain=workspace.google.com&sz=128' },

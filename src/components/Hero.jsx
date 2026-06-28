@@ -98,10 +98,10 @@ const Hero = () => {
               </div>
             </div>
 
-            <Link to="/mis-proyectos" className="group flex items-center gap-3 bg-primary-light text-dark hover:bg-white px-6 py-4 rounded-full font-bold transition-all duration-300 uppercase tracking-widest text-xs w-max mt-4 relative z-10">
+            <a href="#portfolio" className="group flex items-center gap-3 bg-primary-light text-dark hover:bg-white px-6 py-4 rounded-full font-bold transition-all duration-300 uppercase tracking-widest text-xs w-max mt-4 relative z-10">
               Ver Proyectos
               <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} strokeWidth={2} />
-            </Link>
+            </a>
           </motion.div>
 
           {/* Right Column - Contact & Links */}
