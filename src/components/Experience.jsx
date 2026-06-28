@@ -22,21 +22,21 @@ const Experience = () => {
       year: '2024',
       role: 'Practicante de Marketing',
       company: 'Centro Psicoterapéutico Avanti',
-      desc: 'Desarrollo y ejecución de actividades relacionadas al marketing digital y ventas. Creación de contenido para redes sociales y participación en planificación de estrategias. Elaboración de reportes y análisis de métricas para optimizar la visibilidad de la marca.',
+      desc: 'Apoyé la estrategia digital del centro mediante la planificación de contenido, gestión de prospectos y análisis de métricas. Como resultado, contribuí al crecimiento del 120 % de la comunidad en Facebook y fortalecí la comunicación con potenciales pacientes a través de canales digitales.',
       icon: Flower
     },
     {
       year: '2024 – 2025',
       role: 'Asistente de Marketing',
       company: 'Triad Agencia de Marketing',
-      desc: 'Apoyé en la ejecución de campañas integrales en medios digitales y tradicionales. Colaboré en diagnósticos, planificación de contenidos, guiones creativos, activaciones, grabaciones y elaboración de informes mensuales sobre desempeño en redes sociales.',
+      desc: 'Participé en diagnósticos empresariales, investigación de mercado y planificación estratégica para clientes de distintos sectores. Coordiné contenido para redes sociales, producciones audiovisuales y elaboré informes orientados a la toma de decisiones comerciales y de marketing.',
       icon: Zap
     },
     {
       year: '2026',
       role: 'Asistente de Marketing Digital & UX/UI',
       company: 'Exelta Group',
-      desc: 'Participé en el desarrollo de propuestas digitales orientadas a resultados, estructuración web (UX/UI), creación de contenido alineado al recorrido del usuario y análisis de métricas para mejorar y optimizar el rendimiento de activos digitales.',
+      desc: 'Desarrollé soluciones de marketing digital y UX/UI para diversos proyectos, diseñando más de 12 páginas web en Figma, creando contenido para canales digitales y gestionando publicaciones mediante Meta Business Suite y TikTok. Colaboré en la planificación estratégica y optimización de activos digitales para fortalecer la presencia online de diferentes marcas.',
       icon: Smile
     }
   ];

@@ -1,9 +1,21 @@
-import React from 'react';
-import { ArrowUpRight, ArrowUp, Mail } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowUpRight, ArrowUp, Mail, X } from 'lucide-react';
 
 const Contact = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', subject: '', message: '' });
+
+  const handleWhatsAppSubmit = (e) => {
+    e.preventDefault();
+    const text = `Hola Mitzi, soy ${formData.name}. Estoy interesado(a) en: ${formData.subject}. \n\n${formData.message}`;
+    const url = `https://wa.me/51907459557?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+    setIsModalOpen(false);
+    setFormData({ name: '', subject: '', message: '' });
   };
 
   return (
@@ -11,12 +23,13 @@ const Contact = () => {
       <div className="w-full max-w-[1800px] mx-auto">
         
         {/* Contact Banner */}
-        <div className="bg-dark-card rounded-[2rem] py-8 px-8 md:px-10 flex flex-col xl:flex-row items-center justify-between gap-8 mb-5 shadow-xl">
+        <div className="bg-dark-card rounded-[2rem] py-8 px-8 md:px-10 flex flex-col xl:flex-row items-center xl:items-start justify-between gap-6 xl:gap-8 mb-5 shadow-xl">
           
-          <div className="flex flex-col items-center text-center xl:text-left xl:items-start gap-2 shrink-0">
-            <h2 className="text-xl md:text-[26px] font-sans font-medium leading-tight tracking-wide">
-              <span className="text-[var(--color-text-light)]">¿TIENES UN PROYECTO</span><br/>
-              <span className="text-[#a855f7]">EN MENTE?</span>
+          {/* 1. Título */}
+          <div className="flex flex-col items-center text-center xl:text-left xl:items-start gap-2 shrink-0 xl:w-1/4">
+            <h2 className="text-xl md:text-[22px] lg:text-[26px] font-sans font-medium leading-tight tracking-wide">
+              <span className="text-[var(--color-text-light)]">¿TIENES UNA IDEA</span><br/>
+              <span className="text-[#a855f7]">O UN NUEVO RETO?</span>
             </h2>
             {/* Squiggle SVG */}
             <svg width="80" height="12" viewBox="0 0 80 12" fill="none" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-1">
@@ -24,60 +37,47 @@ const Contact = () => {
             </svg>
           </div>
 
-          <div className="max-w-md text-center xl:text-left">
-            <p className="text-gray-400 font-outfit text-xs md:text-[13px] leading-relaxed">
-              Trabajo integrando estrategia, comunicación y diseño para desarrollar soluciones digitales que generen impacto.
+          {/* 2. Primer Párrafo */}
+          <div className="text-center xl:text-left xl:w-1/4">
+            <p className="text-gray-400 font-outfit text-[13px] md:text-[14px] leading-relaxed">
+              Me gusta transformar desafíos en soluciones digitales mediante estrategia, contenido y experiencias centradas en las personas.
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center xl:justify-end items-center gap-3 sm:gap-4 shrink-0">
-            <a 
-              href="https://wa.me/51907459557"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center justify-center gap-2 bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 text-[var(--color-text-light)] px-6 py-3 md:py-3.5 rounded-xl font-sans font-bold text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300"
+          {/* 3. Segundo Párrafo y Botón */}
+          <div className="flex flex-col items-center xl:items-start gap-4 text-center xl:text-left xl:w-1/4">
+            <p className="text-gray-300 font-outfit text-[13px] md:text-[14px] leading-relaxed font-medium">
+              Si buscas aportar valor a tu marca o desarrollar un proyecto con propósito...
+            </p>
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="group flex items-center justify-center gap-2 bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 text-[var(--color-text-light)] px-6 py-3 rounded-xl font-sans font-bold text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 w-max"
             >
               HABLEMOS
               <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </a>
-
-            {/* Social Icons inside circles */}
-            <div className="flex items-center gap-2 sm:gap-3">
-              {/* WhatsApp */}
-              <a href="https://wa.me/51907459557" target="_blank" rel="noopener noreferrer" className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-white/10 rounded-full text-white hover:bg-white/5 transition-colors">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                </svg>
-              </a>
-              {/* Email */}
-              <a href="mailto:mitzi.ip20@gmail.com" className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-white/10 rounded-full text-white hover:bg-white/5 transition-colors">
-                <Mail size={20} strokeWidth={1.5} />
-              </a>
-              {/* Instagram */}
-              <a href="https://instagram.com/mitziparraguirre" target="_blank" rel="noopener noreferrer" className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-white/10 rounded-full text-white hover:bg-white/5 transition-colors">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </a>
-              {/* LinkedIn */}
-              <a href="https://linkedin.com/in/mitziparraguirre" target="_blank" rel="noopener noreferrer" className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center border border-white/10 rounded-full text-white hover:bg-white/5 transition-colors">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
-                </svg>
-              </a>
-              {/* Peace Sign Square */}
-              <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center bg-[#a855f7] rounded-[10px] text-white">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14 6l-2-2-2 2"></path><path d="M14 12V6a2 2 0 0 0-4 0v6"></path><path d="M10 18A6 6 0 1 1 10 6"></path>
-                  {/* Simplified Peace Hand Sign representation */}
-                  <path d="M8 13V5a2 2 0 0 1 4 0v3"></path>
-                  <path d="M12 8V4a2 2 0 0 1 4 0v6"></path>
-                  <path d="M16 10v4"></path>
-                  <path d="M19 14v2a5 5 0 0 1-10 0v-6"></path>
-                </svg>
-              </div>
-            </div>
+            </button>
           </div>
+
+          {/* 4. Links */}
+          <div className="flex items-center justify-center xl:justify-center gap-3 sm:gap-4 shrink-0 xl:w-1/4 my-auto h-full">
+            {/* WhatsApp */}
+            <a href="https://wa.me/51907459557" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center border border-white/10 rounded-full text-white bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 transition-all shadow-lg hover:scale-105">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+            </a>
+            {/* Email */}
+            <a href="mailto:mitzi.ip20@gmail.com" className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center border border-white/10 rounded-full text-white hover:bg-white/10 transition-colors">
+              <Mail size={24} strokeWidth={1.5} />
+            </a>
+            {/* LinkedIn */}
+            <a href="https://linkedin.com/in/mitziparraguirre" target="_blank" rel="noopener noreferrer" className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center border border-white/10 rounded-full text-white hover:bg-white/10 transition-colors">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+          </div>
+
         </div>
 
         {/* Bottom Footer Section (Kept from original) */}
@@ -107,6 +107,69 @@ const Contact = () => {
         </div>
 
       </div>
+
+      {/* Modal de Contacto */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/70 backdrop-blur-sm">
+          <div className="bg-[#1a1a24] border border-white/10 rounded-2xl p-6 w-full max-w-md relative animate-in fade-in zoom-in duration-300">
+            <button 
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
+            <h3 className="text-xl font-sans font-medium text-white mb-1">Conversemos</h3>
+            <p className="text-sm text-gray-400 font-outfit mb-6">Cuéntame un poco sobre tu proyecto y me contactaré contigo a la brevedad.</p>
+            
+            <form onSubmit={handleWhatsAppSubmit} className="flex flex-col gap-4">
+              <div>
+                <label className="block text-xs font-outfit text-gray-400 mb-1">Nombre</label>
+                <input 
+                  type="text" required
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white font-outfit text-sm focus:outline-none focus:border-[#a855f7] transition-colors"
+                  placeholder="Tu nombre"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-outfit text-gray-400 mb-1">Servicio de interés</label>
+                <select 
+                  required
+                  value={formData.subject}
+                  onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                  className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-4 py-2.5 text-white font-outfit text-sm focus:outline-none focus:border-[#a855f7] transition-colors"
+                >
+                  <option value="">Selecciona una opción...</option>
+                  <option value="Marketing Digital & Estrategia">Marketing Digital & Estrategia</option>
+                  <option value="Diseño de Contenido">Diseño de Contenido</option>
+                  <option value="Contenido Audiovisual">Contenido Audiovisual</option>
+                  <option value="UX/UI & Diseño Web">UX/UI & Diseño Web</option>
+                  <option value="Branding">Branding</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-outfit text-gray-400 mb-1">Mensaje breve</label>
+                <textarea 
+                  required rows="3"
+                  value={formData.message}
+                  onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white font-outfit text-sm focus:outline-none focus:border-[#a855f7] transition-colors resize-none"
+                  placeholder="¿En qué te puedo ayudar?"
+                />
+              </div>
+              <button 
+                type="submit"
+                className="w-full mt-2 bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 text-white py-3 rounded-xl font-sans font-bold text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                ENVIAR A WHATSAPP
+                <ArrowUpRight size={16} />
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </footer>
   );
 };

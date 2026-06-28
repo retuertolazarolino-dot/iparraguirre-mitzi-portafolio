@@ -1,58 +1,307 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowUpRight, Sparkles, MessageSquareHeart, Clapperboard, Star, LayoutTemplate, Play, Flower } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useModal } from '../context/ModalContext';
+import { useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, Sparkles, TrendingUp, PenTool, Film, Monitor, Palette, X, ZoomIn, ExternalLink, Mail } from 'lucide-react';
 
-const socialMediaCards = [
-  {
-    id: '01',
-    title: 'CUIDARTE TAMBIÉN ES PRODUCTIVO.',
-    bgClass: 'bg-gradient-to-br from-[#d8b4e2] to-[#b392c6]',
-    textClass: 'text-[#4a2e5d]',
-  },
-  {
-    id: '02',
-    title: '3 PASOS PARA MEJORAR TU ENFOQUE',
-    bgClass: 'bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-[#8a4fff] via-[#6328e0] to-[#4c1d95]',
-    textClass: 'text-white',
-  },
-  {
-    id: '03',
-    title: 'NUEVA COLECCIÓN DISPONIBLE',
-    bgClass: 'bg-[#e0e0e0]',
-    textClass: 'text-black',
-  },
-  {
-    id: '04',
-    title: 'TU MARCA MERECE SER RECORDADA.',
-    bgClass: 'bg-gradient-to-br from-[#d8b4e2] to-[#c79cd6]',
-    textClass: 'text-[#4a2e5d]',
-  },
-  {
-    id: '05',
-    title: 'CONOCE NUESTROS SERVICIOS',
-    bgClass: 'bg-gradient-to-tr from-[#8a4fff] to-[#d8b4e2]',
-    textClass: 'text-white',
-  }
-];
+/* ─────────────────────────────────────────
+   IMAGE MODAL
+───────────────────────────────────────── */
+const ImageModal = ({ src, alt, onClose }) => (
+  <AnimatePresence>
+    {src && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="fixed inset-0 z-[999] flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 md:p-10"
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+          onClick={(e) => e.stopPropagation()}
+          className="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center"
+        >
+          <button
+            onClick={onClose}
+            className="absolute -top-4 -right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-colors"
+          >
+            <X size={18} />
+          </button>
+          <img
+            src={src}
+            alt={alt}
+            className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+          />
+          {alt && (
+            <p className="mt-4 text-gray-400 text-sm tracking-wide">{alt}</p>
+          )}
+        </motion.div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+);
 
-const videoCards = [
-  { img: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?q=80&w=800&auto=format&fit=crop', duration: '0:26' },
-  { img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop', duration: '0:19' },
-  { img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop', duration: '0:22' },
-  { img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=800&auto=format&fit=crop', duration: '0:29' },
-  { img: 'https://images.unsplash.com/photo-1507146426996-ef05306b995a?q=80&w=800&auto=format&fit=crop', duration: '0:19' },
-];
+/* ─────────────────────────────────────────
+   TIKTOK MODAL  — iframe embed mejorado
+───────────────────────────────────────── */
+const TikTokModal = ({ video, onClose }) => {
+  const [iframeError, setIframeError] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
 
+  const handleClose = useCallback(() => {
+    setIframeError(false);
+    setIframeLoaded(false);
+    onClose();
+  }, [onClose]);
+
+  return (
+    <AnimatePresence>
+      {video && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={handleClose}
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4"
+        >
+          <motion.div
+            initial={{ scale: 0.92, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.92, opacity: 0, y: 20 }}
+            transition={{ type: 'spring', damping: 24, stiffness: 280 }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative flex flex-col items-center gap-3 w-full max-w-[380px]"
+          >
+            {/* Header del modal */}
+            <div className="w-full flex items-center justify-between px-1">
+              <div className="flex items-center gap-2">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.76a4.83 4.83 0 0 1-1.01-.07z"/>
+                </svg>
+                <span className="text-white font-sans font-semibold text-sm tracking-wide">{video.title}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href={video.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-[#9b51e0] hover:text-[#c77dff] transition-colors font-sans font-bold text-[10px] tracking-widest"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  VER EN TIKTOK <ExternalLink size={12} />
+                </a>
+                <button
+                  onClick={handleClose}
+                  className="w-8 h-8 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center transition-colors border border-white/10"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+            </div>
+
+            {/* Contenido: iframe o fallback */}
+            <div
+              className="w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black flex flex-col items-center justify-center"
+              style={{ height: 'min(75vh, 680px)' }}
+            >
+              {iframeError ? (
+                /* Fallback cuando el video no permite embed */
+                <div className="flex flex-col items-center justify-center gap-6 p-8 text-center h-full">
+                  <div className="w-20 h-20 rounded-2xl bg-[#9b51e0]/15 border border-[#9b51e0]/30 flex items-center justify-center">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="#9b51e0">
+                      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.76a4.83 4.83 0 0 1-1.01-.07z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-white font-sans font-semibold text-base mb-2">{video.title}</p>
+                    <p className="text-gray-400 font-outfit text-sm leading-relaxed">
+                      Este video no permite reproducirse de manera incrustada. Puedes verlo directamente en TikTok.
+                    </p>
+                  </div>
+                  <a
+                    href={video.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 text-white px-6 py-3 rounded-full font-sans font-bold text-xs tracking-widest uppercase transition-all duration-300 hover:scale-105 shadow-lg"
+                  >
+                    ABRIR EN TIKTOK <ExternalLink size={14} />
+                  </a>
+                </div>
+              ) : (
+                /* iframe normal */
+                <iframe
+                  key={video.id}
+                  src={`https://www.tiktok.com/embed/v2/${video.id}?autoplay=0`}
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="encrypted-media;"
+                  allowFullScreen
+                  title={`TikTok – ${video.title}`}
+                  onLoad={() => setIframeLoaded(true)}
+                  onError={() => setIframeError(true)}
+                />
+              )}
+            </div>
+
+            {!iframeError && (
+              <p className="text-gray-600 text-[10px] font-outfit text-center">
+                Si el video no carga, usa el link “VER EN TIKTOK” de arriba.
+              </p>
+            )}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+/* ─────────────────────────────────────────
+   TIKTOK CARD — tarjeta de preview
+───────────────────────────────────────── */
+const TikTokCard = ({ videoId, url, title, account, onOpen }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4 }}
+    viewport={{ once: true }}
+    onClick={() => onOpen({ id: videoId, url, title })}
+    className="bg-[#0f0f15] rounded-2xl overflow-hidden border border-white/8 shadow-lg flex flex-col cursor-pointer group hover:border-[#9b51e0]/40 transition-all duration-300"
+  >
+    {/* Preview area */}
+    <div className="relative flex-1 min-h-[260px] bg-gradient-to-br from-[#1a1030] to-[#0d0d18] flex flex-col items-center justify-center gap-5 p-6">
+      {/* Glow de fondo */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(ellipse_at_center,_rgba(155,81,224,0.15)_0%,_transparent_70%)]" />
+
+      {/* Logo TikTok grande */}
+      <div className="relative z-10 flex flex-col items-center gap-4">
+        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-[#9b51e0]/20 group-hover:border-[#9b51e0]/40 transition-all duration-300">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" className="opacity-80 group-hover:opacity-100">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.19 8.19 0 0 0 4.78 1.52V6.76a4.83 4.83 0 0 1-1.01-.07z"/>
+          </svg>
+        </div>
+
+        <div className="text-center">
+          <p className="text-white font-sans font-semibold text-base mb-1">{title}</p>
+          <p className="text-gray-500 font-outfit text-xs">{account}</p>
+        </div>
+      </div>
+
+      {/* Botón play */}
+      <div className="relative z-10 flex items-center gap-2 bg-[#9b51e0]/90 group-hover:bg-[#9b51e0] px-5 py-2.5 rounded-full transition-all duration-300 group-hover:scale-105 group-hover:shadow-[0_0_20px_rgba(155,81,224,0.5)]">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+          <path d="M5 3l14 9-14 9V3z" />
+        </svg>
+        <span className="text-white font-sans font-bold text-xs tracking-widest uppercase">Ver Video</span>
+      </div>
+    </div>
+
+    {/* Footer bar */}
+    <div className="px-4 py-3 border-t border-white/5 flex items-center justify-between bg-[#0b0b10]">
+      <span className="text-gray-500 font-outfit text-[10px] uppercase tracking-widest">TikTok</span>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+        className="text-[#9b51e0] hover:text-[#c77dff] transition-colors flex items-center gap-1 font-sans font-bold text-[10px] tracking-widest"
+      >
+        ENLACE <ArrowUpRight size={13} />
+      </a>
+    </div>
+  </motion.div>
+);
+
+/* ─────────────────────────────────────────
+   CLICKABLE IMAGE CARD
+───────────────────────────────────────── */
+const ImageCard = ({ src, alt, onOpen, delay = 0, link = null }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.97 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5, delay }}
+    viewport={{ once: true }}
+    className="relative group rounded-2xl overflow-hidden bg-[#111115] cursor-pointer flex flex-col"
+  >
+    <div
+      className="flex-1 relative overflow-hidden"
+      onClick={() => onOpen(src, alt)}
+    >
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center">
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center">
+          <ZoomIn size={18} className="text-white" />
+        </div>
+      </div>
+    </div>
+    {link && (
+      <div className="shrink-0 border-t border-white/5 px-4 py-2.5 flex items-center justify-between bg-[#0e0e12]">
+        <span className="text-[11px] text-gray-500 truncate">{link.replace(/https?:\/\//, '').replace(/\/$/, '')}</span>
+        <a
+          href={link}
+          target="_blank"
+          rel="noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          className="flex items-center gap-1 text-primary-light hover:text-white text-[11px] font-semibold tracking-wide shrink-0 ml-3 transition-colors"
+        >
+          Ver sitio <ArrowUpRight size={13} />
+        </a>
+      </div>
+    )}
+  </motion.div>
+);
+
+/* ─────────────────────────────────────────
+   SECTION LABEL
+───────────────────────────────────────── */
+const SectionLabel = ({ num, title, desc, icon: Icon, color }) => (
+  <div className="lg:w-[280px] shrink-0">
+    <div className="flex items-start gap-4">
+      <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0" style={{ backgroundColor: `${color}22` }}>
+        <Icon size={28} strokeWidth={1.5} style={{ color }} />
+      </div>
+      <div>
+        <h3 className="text-white font-sans text-lg md:text-xl font-medium tracking-wide mb-2 uppercase">
+          {num}. {title}
+        </h3>
+        <p className="text-gray-400 font-outfit text-sm font-light leading-relaxed">{desc}</p>
+      </div>
+    </div>
+  </div>
+);
+
+/* ─────────────────────────────────────────
+   MAIN COMPONENT
+───────────────────────────────────────── */
 const Portfolio = () => {
-  const { openContactModal } = useModal();
+  const [modal, setModal] = useState({ src: null, alt: null });
+  const openModal = (src, alt) => setModal({ src, alt });
+  const closeModal = () => setModal({ src: null, alt: null });
+
+  const [selectedTikTok, setSelectedTikTok] = useState(null);
+
+  // Modal de contacto (duplicado de Contact.jsx para independencia)
+  const [isContactOpen, setIsContactOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', subject: '', message: '' });
+  const handleWhatsAppSubmit = (e) => {
+    e.preventDefault();
+    const text = `Hola Mitzi, soy ${formData.name}. Estoy interesado(a) en: ${formData.subject}.\n\n${formData.message}`;
+    window.open(`https://wa.me/51907459557?text=${encodeURIComponent(text)}`, '_blank');
+    setIsContactOpen(false);
+    setFormData({ name: '', subject: '', message: '' });
+  };
+
   return (
     <section id="portfolio" className="bg-dark w-full pb-5 px-3 md:px-4 flex justify-center">
       <div className="w-full max-w-[1800px] mx-auto">
         <div className="bg-dark-card rounded-3xl p-6 md:p-8 lg:p-10 w-full overflow-hidden">
-          
-          {/* Header Section */}
+
+          {/* Header */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12">
             <div className="flex items-start gap-4">
               <Sparkles size={36} className="text-primary-light shrink-0" strokeWidth={1.5} />
@@ -65,182 +314,187 @@ const Portfolio = () => {
                 </p>
               </div>
             </div>
-            <Link to="/mis-proyectos" className="group flex items-center justify-center gap-2 border border-white/10 text-gray-300 hover:text-white hover:border-white/30 hover:bg-white/5 rounded-full px-6 py-3 font-medium transition-all duration-300 uppercase tracking-widest text-[11px] min-w-max">
-              VER TODOS LOS PROYECTOS
-              <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} strokeWidth={1.5} />
-            </Link>
+            <button
+              onClick={() => setIsContactOpen(true)}
+              className="group flex items-center justify-center gap-2 bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 text-white rounded-full px-6 py-3 font-sans font-bold transition-all duration-300 uppercase tracking-widest text-[11px] min-w-max shadow-[0_0_20px_rgba(155,81,224,0.3)] hover:shadow-[0_0_30px_rgba(155,81,224,0.5)]"
+            >
+              HAGAMOS ALGO JUNTOS
+              <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" size={16} strokeWidth={2} />
+            </button>
           </div>
 
-          <div className="w-full h-[1px] bg-white/5 mb-10"></div>
+          <div className="w-full h-[1px] bg-white/5 mb-10" />
 
-          {/* Categories Grid Rows */}
           <div className="flex flex-col gap-12">
 
-            {/* Row 1: SOCIAL MEDIA */}
+            {/* ── 01 MARKETING DIGITAL & ESTRATEGIA ── */}
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 pb-12 border-b border-white/5">
-              <div className="lg:w-[280px] shrink-0">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-primary-light/20 flex items-center justify-center shrink-0">
-                    <MessageSquareHeart size={28} className="text-primary-light" strokeWidth={1.5} />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-sans text-lg md:text-xl font-medium tracking-wide mb-2 uppercase">
-                      01. SOCIAL MEDIA
-                    </h3>
-                    <p className="text-gray-400 font-outfit text-sm font-light leading-relaxed">
-                      Contenido estratégico visual para redes sociales que conecta marcas con su audiencia.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 lg:gap-4">
-                {socialMediaCards.map((card, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className={`aspect-square rounded-2xl overflow-hidden p-4 flex flex-col justify-between ${card.bgClass}`}
-                  >
-                    <div className="opacity-60 flex items-center gap-1">
-                       <span className={`text-[8px] tracking-widest ${card.textClass}`}>AVANTI</span>
-                    </div>
-                    <h4 className={`text-[11px] md:text-xs font-bold leading-tight ${card.textClass}`}>
-                      {card.title}
-                    </h4>
-                  </motion.div>
-                ))}
+              <SectionLabel
+                num="01" title="Marketing Digital & Estrategia"
+                desc="Desarrollo estrategias digitales a partir del análisis de marcas, usuarios y competencia. Planifico contenidos, interpreto métricas y defino acciones orientadas a fortalecer la presencia digital y alcanzar objetivos de negocio."
+                icon={TrendingUp} color="#D9ACF2"
+              />
+              <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
+                <ImageCard src="/assets/images/portfolio/marketing-digital-estrategia/SOCIAL_MEDIA_PORTAFOLIO_AVANTICP.webp" alt="Avanti CP – Marketing Digital" onOpen={openModal} delay={0} />
+                <ImageCard src="/assets/images/portfolio/marketing-digital-estrategia/SOCIAL_MEDIA_PORTAFOLIO_OKAMI.webp" alt="Okami – Marketing Digital" onOpen={openModal} delay={0.1} />
               </div>
             </div>
 
-            {/* Row 2: EDICIÓN DE VIDEOS */}
+            {/* ── 02 DISEÑO DE CONTENIDO ── */}
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 pb-12 border-b border-white/5">
-              <div className="lg:w-[280px] shrink-0">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#9b51e0]/20 flex items-center justify-center shrink-0">
-                    <Clapperboard size={28} className="text-[#9b51e0]" strokeWidth={1.5} />
+              <SectionLabel
+                num="02" title="Diseño de Contenido"
+                desc="Diseño piezas gráficas y material publicitario para campañas, redes sociales y comunicación digital, desarrollando contenido visual alineado con la identidad de marca y los objetivos de cada proyecto."
+                icon={PenTool} color="#f472b6"
+              />
+              <div className="flex-1 flex flex-col gap-6">
+                <div>
+                  <p className="text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-3">Carruseles / Post</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
+                    <ImageCard src="/assets/images/portfolio/diseno-contenido/DESIGN POST.webp" alt="Design Post" onOpen={openModal} delay={0} />
+                    <ImageCard src="/assets/images/portfolio/diseno-contenido/SOCIAL MEDIA.webp" alt="Social Media" onOpen={openModal} delay={0.1} />
                   </div>
-                  <div>
-                    <h3 className="text-white font-sans text-lg md:text-xl font-medium tracking-wide mb-2 uppercase">
-                      02. EDICIÓN DE VIDEOS
-                    </h3>
-                    <p className="text-gray-400 font-outfit text-sm font-light leading-relaxed">
-                      Producción, grabación y edición de videos para marcas y redes sociales.
-                    </p>
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-3">Piezas Publicitarias</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
+                    <ImageCard src="/assets/images/portfolio/diseno-contenido/KADA.webp" alt="KADA – Pieza Publicitaria" onOpen={openModal} delay={0} />
+                    <ImageCard src="/assets/images/portfolio/diseno-contenido/TYR.webp" alt="TYR – Pieza Publicitaria" onOpen={openModal} delay={0.1} />
                   </div>
                 </div>
               </div>
-              <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 lg:gap-4">
-                {videoCards.map((video, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="aspect-square rounded-2xl overflow-hidden relative group cursor-pointer"
-                  >
-                    <img src={video.img} alt={`Video ${index}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                      <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
-                        <Play size={18} className="text-white fill-white ml-0.5" />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-2 right-2 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] text-white font-medium">
-                      {video.duration}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
             </div>
 
-            {/* Row 3: BRANDING */}
+            {/* ── 03 CONTENIDO AUDIOVISUAL ── */}
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 pb-12 border-b border-white/5">
-              <div className="lg:w-[280px] shrink-0">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#ff9a9e]/20 flex items-center justify-center shrink-0">
-                    <Star size={28} className="text-[#ff9a9e]" strokeWidth={1.5} />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-sans text-lg md:text-xl font-medium tracking-wide mb-2 uppercase">
-                      03. BRANDING
-                    </h3>
-                    <p className="text-gray-400 font-outfit text-sm font-light leading-relaxed">
-                      Desarrollo de identidad visual que traduce el propósito de una marca en elementos gráficos coherentes.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="h-32 md:h-full min-h-[140px] rounded-2xl bg-[#2b1f41] flex flex-col items-center justify-center p-4">
-                  <Flower size={36} className="text-white mb-2" strokeWidth={1} />
-                  <span className="text-white font-sans text-xl tracking-widest font-light uppercase">AVANTI</span>
-                  <span className="text-white/50 text-[6px] tracking-widest uppercase mt-1">Centro Psicoterapéutico</span>
-                </motion.div>
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="h-32 md:h-full min-h-[140px] rounded-2xl bg-[#e6e6e6] overflow-hidden relative">
-                   {/* Placeholder for Mockup */}
-                   <div className="absolute inset-0 bg-gradient-to-tr from-gray-300 to-gray-100 flex items-center justify-center">
-                     <span className="text-gray-400 text-xs font-bold uppercase tracking-widest">Mockup</span>
-                   </div>
-                </motion.div>
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="h-32 md:h-full min-h-[140px] rounded-2xl bg-gradient-to-br from-[#8a4fff] to-[#6328e0] overflow-hidden relative p-6">
-                   <span className="text-white font-sans text-xl tracking-widest font-bold uppercase block mb-1">TRIAD</span>
-                   <span className="text-white/60 text-[8px] tracking-widest uppercase block">Agencia de Mkt</span>
-                </motion.div>
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="h-32 md:h-full min-h-[140px] rounded-2xl bg-[#f0f0f0] flex flex-col items-center justify-center p-4">
-                   <div className="text-[#333] font-bold text-lg uppercase tracking-wider">EXELTA</div>
-                   <div className="text-[#666] text-[7px] tracking-widest uppercase mt-0.5">GROUP</div>
-                </motion.div>
+              <SectionLabel
+                num="03" title="Contenido Audiovisual"
+                desc="Produzco y edito contenido audiovisual adaptado a diferentes plataformas digitales, buscando transmitir mensajes de forma dinámica, creativa y alineada con la identidad de cada proyecto."
+                icon={Film} color="#9b51e0"
+              />
+              <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <TikTokCard
+                  title="Avanti CP"
+                  account="@avanticp.pe"
+                  videoId="7350847120976547077"
+                  url="https://www.tiktok.com/@avanticp.pe/video/7350847120976547077"
+                  onOpen={setSelectedTikTok}
+                />
+                <TikTokCard
+                  title="Niva"
+                  account="@niva.pe"
+                  videoId="7598659382116699412"
+                  url="https://www.tiktok.com/@niva.pe/video/7598659382116699412"
+                  onOpen={setSelectedTikTok}
+                />
+                <TikTokCard
+                  title="Exelta Group"
+                  account="@exeltagroup.au"
+                  videoId="7599819030463040789"
+                  url="https://www.tiktok.com/@exeltagroup.au/video/7599819030463040789"
+                  onOpen={setSelectedTikTok}
+                />
               </div>
             </div>
 
-            {/* Row 4: DISEÑO WEB */}
+            {/* ── 04 UX/UI & DISEÑO WEB ── */}
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 pb-12 border-b border-white/5">
+              <SectionLabel
+                num="04" title="UX/UI & Diseño Web"
+                desc="Diseño interfaces digitales con enfoque en experiencia de usuario, estructurando flujos claros e intuitivos. Cada proyecto es una solución visual centrada en las personas y orientada a los objetivos de negocio."
+                icon={Monitor} color="#76c8ff"
+              />
+              <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-4">
+                <ImageCard src="/assets/images/portfolio/ux-ui-diseno-web/DISENO_WEB_DON_LALITO.webp" alt="Don Lalito Bohorquez" onOpen={openModal} delay={0} link="https://donlalitobohorquez.pe/" />
+                <ImageCard src="/assets/images/portfolio/ux-ui-diseno-web/DISENO_WEB_EVERCOAT.webp" alt="Evercoat Group" onOpen={openModal} delay={0.1} link="https://www.evercoatgroup.com.au/" />
+                <ImageCard src="/assets/images/portfolio/ux-ui-diseno-web/DISENO_WEB_GRUPO_ROMA.webp" alt="Hotel Grupo Roma" onOpen={openModal} delay={0.2} link="https://hotel.gruporoma.pe/" />
+              </div>
+            </div>
+
+            {/* ── 05 BRANDING ── */}
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-              <div className="lg:w-[280px] shrink-0">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-[#76c8ff]/20 flex items-center justify-center shrink-0">
-                    <LayoutTemplate size={28} className="text-[#76c8ff]" strokeWidth={1.5} />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-sans text-lg md:text-xl font-medium tracking-wide mb-2 uppercase">
-                      04. DISEÑO WEB
-                    </h3>
-                    <p className="text-gray-400 font-outfit text-sm font-light leading-relaxed">
-                      Diseño de interfaces digitales con enfoque en experiencia de usuario (UX/UI) y estructura orientada a objetivos.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="h-48 md:h-[220px] rounded-2xl bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-[#4c1d95] via-[#1a0b36] to-black p-6 md:p-8 flex flex-col justify-end relative overflow-hidden">
-                   <div className="absolute top-6 left-6 text-white text-xs font-bold tracking-widest">EXELTA GROUP</div>
-                   <div className="relative z-10 w-2/3">
-                     <h4 className="text-white text-xl md:text-2xl font-bold leading-tight mb-4">Estrategia <span className="text-primary-light">digital</span> que impulsa tu negocio.</h4>
-                     <button onClick={openContactModal} className="cursor-pointer hover:bg-primary-light/30 transition-colors bg-primary-light/20 border border-primary-light/50 text-primary-light text-[10px] px-4 py-1.5 rounded-full font-bold uppercase tracking-wider relative z-20">CONOCE MÁS</button>
-                   </div>
-                </motion.div>
-                
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="h-48 md:h-[220px] rounded-2xl bg-[#e2dedb] p-6 md:p-8 flex flex-col justify-end relative overflow-hidden">
-                   <div className="absolute top-6 left-6 text-[#333] text-xs tracking-widest flex items-center gap-1.5">
-                     <Flower size={14} /> AVANTI
-                   </div>
-                   <div className="relative z-10 w-2/3">
-                     <h4 className="text-[#333] text-xl md:text-2xl font-bold leading-tight mb-4">Bienestar emocional para una vida plena.</h4>
-                     <button onClick={openContactModal} className="cursor-pointer hover:bg-[#723bc4] transition-colors bg-[#8a4fff] text-white text-[10px] px-4 py-1.5 rounded-full font-bold uppercase tracking-wider relative z-20">AGENDA TU CITA</button>
-                   </div>
-                </motion.div>
+              <SectionLabel
+                num="05" title="Branding"
+                desc="Desarrollo de identidad visual que traduce el propósito de una marca en elementos gráficos coherentes y funcionales."
+                icon={Palette} color="#ff9a9e"
+              />
+              <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-3 lg:gap-4">
+                <ImageCard src="/assets/images/portfolio/branding/BRANDING_EMPRESA.webp" alt="Branding Empresa" onOpen={openModal} delay={0} />
+                <ImageCard src="/assets/images/portfolio/branding/BRANDING_MARCA.webp" alt="Branding Marca" onOpen={openModal} delay={0.1} />
+                <ImageCard src="/assets/images/portfolio/branding/MARCA_BRANDING.webp" alt="Marca Branding" onOpen={openModal} delay={0.2} />
               </div>
             </div>
 
           </div>
         </div>
       </div>
+
+      {/* Modal de Imagen */}
+      <ImageModal src={modal.src} alt={modal.alt} onClose={closeModal} />
+
+      {/* Modal de TikTok */}
+      <TikTokModal video={selectedTikTok} onClose={() => setSelectedTikTok(null)} />
+
+      {/* Modal de Contacto */}
+      {isContactOpen && (
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center px-4 bg-black/70 backdrop-blur-sm">
+          <div className="bg-[#1a1a24] border border-white/10 rounded-2xl p-6 w-full max-w-md relative">
+            <button onClick={() => setIsContactOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+              <X size={20} />
+            </button>
+            <h3 className="text-xl font-sans font-medium text-white mb-1">Conversemos</h3>
+            <p className="text-sm text-gray-400 font-outfit mb-6">Cuéntame un poco sobre tu proyecto y me contactaré contigo a la brevedad.</p>
+            <form onSubmit={handleWhatsAppSubmit} className="flex flex-col gap-4">
+              <div>
+                <label className="block text-xs font-outfit text-gray-400 mb-1">Nombre</label>
+                <input
+                  type="text" required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white font-outfit text-sm focus:outline-none focus:border-[#a855f7] transition-colors"
+                  placeholder="Tu nombre"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-outfit text-gray-400 mb-1">Servicio de interés</label>
+                <select
+                  required
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  className="w-full bg-[#1a1a24] border border-white/10 rounded-lg px-4 py-2.5 text-white font-outfit text-sm focus:outline-none focus:border-[#a855f7] transition-colors"
+                >
+                  <option value="">Selecciona una opción...</option>
+                  <option value="Marketing Digital & Estrategia">Marketing Digital & Estrategia</option>
+                  <option value="Diseño de Contenido">Diseño de Contenido</option>
+                  <option value="Contenido Audiovisual">Contenido Audiovisual</option>
+                  <option value="UX/UI & Diseño Web">UX/UI & Diseño Web</option>
+                  <option value="Branding">Branding</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-outfit text-gray-400 mb-1">Mensaje breve</label>
+                <textarea
+                  required rows="3"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-white font-outfit text-sm focus:outline-none focus:border-[#a855f7] transition-colors resize-none"
+                  placeholder="¿En qué te puedo ayudar?"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full mt-2 bg-gradient-to-r from-[#9b51e0] to-[#c77dff] hover:opacity-90 text-white py-3 rounded-xl font-sans font-bold text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                ENVIAR A WHATSAPP
+                <ArrowUpRight size={16} />
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
 
 export default Portfolio;
-
-// Since we used Flower inside this file without importing it, we should add it.
-// I will rewrite to ensure Flower is imported.
