@@ -29,14 +29,23 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            style={{
-              boxShadow: "inset 0 0 0 2px rgba(217, 172, 242, 0.3)",
-            }}
             transition={{ duration: 0.6 }}
-            className="bg-dark-card rounded-3xl p-2 h-[400px] sm:h-[450px] lg:h-full lg:min-h-[600px] relative overflow-hidden"
+            className="bg-dark-card rounded-3xl h-[400px] sm:h-[450px] lg:h-full lg:min-h-[600px] relative overflow-hidden flex items-center justify-center shadow-lg"
           >
+            {/* Animated spinning background - Glow effect */}
+            <div 
+              className="absolute w-[250%] h-[250%] animate-spin pointer-events-none z-0 blur-md"
+              style={{
+                background: 'conic-gradient(from 0deg, transparent 0%, transparent 30%, rgba(155, 81, 224, 0.1) 50%, rgba(199, 125, 255, 0.4) 80%, rgba(235, 200, 255, 1) 100%)',
+                animationDuration: '14s'
+              }}
+            />
+            
+            {/* Mask to create the border effect (2px border) */}
+            <div className="absolute inset-[2px] rounded-[1.35rem] bg-[#111115] z-0"></div>
+
             {/* Inner purple glow gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-transparent opacity-50 z-0 pointer-events-none"></div>
+            <div className="absolute inset-[1px] rounded-[1.35rem] bg-gradient-to-br from-[#9b51e0]/10 via-transparent to-transparent opacity-40 z-0 pointer-events-none"></div>
 
             <motion.img
               src="/assets/images/mitzi-iparraguirre-foto-casual.webp"
@@ -44,7 +53,7 @@ const Hero = () => {
               initial={{ opacity: 0, scale: 1.05 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
-              className="absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] object-cover rounded-[1.25rem] z-10 object-top"
+              className="absolute inset-[6px] w-[calc(100%-12px)] h-[calc(100%-12px)] object-cover rounded-[1.2rem] z-10 object-top"
               onError={(e) => { e.target.style.display = 'none'; }}
             />
           </motion.div>
