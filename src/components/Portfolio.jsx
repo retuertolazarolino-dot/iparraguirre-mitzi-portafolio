@@ -303,10 +303,10 @@ const Portfolio = () => {
 
           {/* Header - apila en móvil, fila en desktop */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-12">
-            <div className="flex items-start gap-4">
-              <Sparkles size={32} className="text-primary-light shrink-0 mt-0.5" strokeWidth={1.5} />
+            <div className="flex items-center gap-3">
+              <Sparkles size={28} className="text-primary-light shrink-0" strokeWidth={1.5} />
               <div>
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-sans font-medium text-[var(--color-text-light)] uppercase tracking-wide mb-2">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-sans font-medium text-[var(--color-text-light)] uppercase tracking-wide mb-1">
                   PROYECTOS SELECCIONADOS
                 </h2>
                 <p className="text-gray-400 font-outfit text-sm font-light">
